@@ -11,6 +11,7 @@ export default defineConfig({
     runtimeErrorOverlay(),
     tailwindcss(),
     metaImagesPlugin(),
+    base: "/Shanmukhportfolio",
     ...(process.env.NODE_ENV !== "production" &&
     process.env.REPL_ID !== undefined
       ? [
