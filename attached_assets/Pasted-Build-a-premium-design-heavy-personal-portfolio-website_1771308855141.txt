@@ -1,0 +1,144 @@
+Build a premium, design-heavy personal portfolio website using HTML, CSS, and JavaScript (no frameworks required, but you may use GSAP, Three.js, or similar animation libraries if needed). The site must feel like a $5000 custom-built interactive portfolio — highly polished, immersive, and minimalist but visually striking.
+
+CORE EXPERIENCE:
+This portfolio should feel like a scroll-based story from header to footer. As the user scrolls, each section reveals with smooth scroll-triggered animations. Use cinematic transitions, motion typography, parallax, and subtle 3D effects where appropriate. Every element should feel intentional and animated — but not cluttered.
+
+GLOBAL DESIGN RULES:
+- Minimalist layout but high-end visual style
+- Smooth scroll animations across entire site
+- Scroll-triggered reveals for every section
+- Light mode + Dark mode with toggle
+- Glassmorphism or soft depth effects where appropriate
+- Custom typography pairing (modern + elegant)
+- Micro-interactions on hover
+- Cursor glow/light reveal effect for background elements
+- Responsive design for desktop + mobile
+- Smooth performance (avoid lag)
+
+CURSOR LIGHT REVEAL EFFECT:
+Background elements across the site should initially appear hidden or dimmed. The mouse cursor should act like a “light source” that reveals them on hover using a radial gradient mask or spotlight effect. Apply this effect only to background decorative elements, icons, and floating visuals — not main text content.
+
+SECTIONS TO BUILD:
+
+1️⃣ HERO SECTION — INTRO STORY
+- Full screen hero with animated typography
+- Name + title with kinetic text animation
+- Short intro about me
+- Background animated particles or subtle 3D motion
+- Scroll indicator animation
+- Cinematic entrance animation
+
+2️⃣ ABOUT + SKILLS SECTION
+- Short professional bio
+- Skill tools displayed as logos/icons
+- Logos appear in darkness and reveal when cursor light passes over them
+- Floating layout with parallax motion
+- Hover glow effect on each tool
+- Subtle depth / 3D transform on hover
+
+3️⃣ CERTIFICATIONS SECTION
+- Scroll reveal animation
+- Show only 4 certificates initially
+- Card-based layout with elegant animation
+- Each card animates in sequence
+- Button: “View All Certifications”
+- Clicking expands and reveals remaining certificates with stagger animation
+- Smooth collapse/expand animation
+
+4️⃣ SERVICES SECTION
+Display 3 main services with strong visual cards:
+- UI Design
+- Landing Page Development
+- Digital Marketing
+
+Each service card should have:
+- Animated icon
+- Hover animation with depth lift
+- Gradient border or glow effect
+- Subtle tilt on hover
+
+5️⃣ PROJECTS SECTION — INTERACTIVE CATEGORIES
+
+Categories:
+- Figma Projects
+- WordPress Projects
+- Design Projects
+- Development Projects
+
+Design Projects has subcategories:
+- Logos
+- Flyers
+- Posters
+- Others
+
+Behavior:
+- Category tabs with animated switching
+- Instead of showing all projects, show a project name list
+- On hover:
+  - Show preview image popup
+  - Reveal buttons:
+    - Live Preview
+    - GitHub / Figma / WordPress link
+- Smooth hover preview animation
+- Lazy load preview images
+- Animated underline or indicator for selected category
+
+6️⃣ SCROLL STORY TRANSITIONS
+Between sections add animated transition dividers:
+- Line animations
+- Text reveal quotes
+- Motion blur fades
+- Mask reveal effects
+
+7️⃣ CONTACT SECTION — LET’S CONNECT
+- Elegant contact section with strong typography
+- EmailJS powered contact form
+- Fields:
+  - Name
+  - Email
+  - Message
+- Animated form labels
+- Glow focus effects
+- Submit animation with success state
+
+Include EmailJS integration code with placeholders:
+EMAILJS_PUBLIC_KEY = "YOUR_KEY"
+EMAILJS_SERVICE_ID = "YOUR_SERVICE"
+EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE"
+
+Make these easy to replace.
+
+8️⃣ DARK / LIGHT MODE
+- Toggle button fixed in navbar
+- Smooth color transition
+- Maintain contrast and readability
+- Different glow colors per mode
+
+9️⃣ NAVIGATION
+- Sticky minimal navbar
+- Section scroll navigation
+- Active section indicator
+- Smooth scrolling
+
+ANIMATION LIBRARIES ALLOWED:
+- GSAP + ScrollTrigger
+- Three.js (only if lightweight)
+- Lenis or smooth-scroll library
+
+PERFORMANCE:
+- Optimize animations
+- Use intersection observers or scroll triggers
+- Avoid heavy rendering loops
+
+DELIVERABLES:
+Generate complete working code:
+- index.html
+- styles.css
+- script.js
+- animation setup
+- EmailJS integration
+- Placeholder images and assets
+- Comments explaining where to replace content
+
+The design should feel award-level, immersive, and unique — not template-like.
+Take creative freedom in layout, motion, and visual storytelling.
