@@ -44,7 +44,7 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-6 flex justify-between items-center">
         <a href="#" className="text-2xl font-display font-bold tracking-tighter hover:opacity-80 transition-opacity">
-          AM<span className="text-primary">.</span>
+          SS<span className="text-primary">.</span>
         </a>
 
         {/* Desktop Nav */}

@@ -1,27 +1,30 @@
 import { motion } from "framer-motion";
-import heroBg from "@/assets/hero-bg.png";
 import { ArrowDown } from "lucide-react";
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'spline-viewer': any;
+    }
+  }
+}
 
 export default function Hero() {
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
+      {/* Spline 3D Background */}
       <div className="absolute inset-0 z-0">
-        <motion.div 
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 10, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
-            className="w-full h-full"
-        >
-            <img 
-              src={heroBg} 
-              alt="Background" 
-              className="w-full h-full object-cover opacity-40 dark:opacity-60"
-            />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/20 to-background" />
+        <spline-viewer 
+          url="https://prod.spline.design/5FhkalGo8zOKwTsh/scene.splinecode"
+          class="w-full h-full"
+          loading-anim-type="none"
+        ></spline-viewer>
+        {/* Subtle overlay to ensure text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-background" />
       </div>
 
-      <div className="container relative z-10 px-6 pt-20">
+      {/* Content */}
+      <div className="container relative z-10 px-6 pt-20 pointer-events-none">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
@@ -32,12 +35,12 @@ export default function Hero() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-primary font-medium tracking-widest mb-4 uppercase"
+            className="text-primary font-medium tracking-widest mb-4 uppercase pointer-events-auto"
           >
             Shanmukh Srinadh
           </motion.p>
           
-          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-tight mb-8">
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-tight mb-8 pointer-events-auto">
             <span className="block overflow-hidden">
                 <motion.span 
                     initial={{ y: "100%" }}
@@ -74,7 +77,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2, duration: 1 }}
-            className="flex flex-col md:flex-row gap-8 items-start md:items-center mt-12"
+            className="flex flex-col md:flex-row gap-8 items-start md:items-center mt-12 pointer-events-auto"
           >
             <p className="max-w-md text-lg text-muted-foreground leading-relaxed">
               I am a UI/UX Designer and Web Developer focused on building seamless digital experiences.
@@ -93,6 +96,7 @@ export default function Hero() {
         </motion.div>
       </div>
 
+      {/* Scroll Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
