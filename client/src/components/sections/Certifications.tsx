@@ -4,13 +4,15 @@ import { ChevronDown, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const allCertificates = [
-  { title: "Google UX Design Professional", issuer: "Google", year: "2024" },
-  { title: "Advanced React & Redux", issuer: "Udemy", year: "2023" },
-  { title: "AWWWARDS Jury Member", issuer: "AWWWARDS", year: "2023" },
-  { title: "Creative Frontend Architecture", issuer: "Frontend Masters", year: "2022" },
-  { title: "Three.js Journey", issuer: "Bruno Simon", year: "2022" },
-  { title: "UI/UX Masterclass", issuer: "DesignCourse", year: "2021" },
-  { title: "Full Stack Web Development", issuer: "Meta", year: "2021" },
+  { title: "UI/UX Developer", issuer: "Tech Mahindra Foundation", year: "2025" },
+  { title: "Graphic Design", issuer: "InAmigos Foundation", year: "2025" },
+  { title: "Instruction Designer", issuer: "Dr Reddy's Foundation", year: "2025" },
+  { title: "Website UI/UX Designing", issuer: "SimpliLearn", year: "2025" },
+  { title: "Prompt Engineering", issuer: "SimpliLearn", year: "2025" },
+  { title: "Essentials of Cloud Computing", issuer: "Infosys Springboard", year: "2023" },
+  { title: "Digital Marketing", issuer: "Verzeo", year: "2022" },
+  { title: "Azure AI Fundamentals", issuer: "Microsoft", year: "2022" },
+  { title: "HTML5 Application Development", issuer: "Microsoft", year: "2022" },
 ];
 
 export default function Certifications() {
@@ -33,7 +35,7 @@ export default function Certifications() {
             <AnimatePresence>
                 {visibleCertificates.map((cert, index) => (
                     <motion.div
-                        key={cert.title}
+                        key={cert.title + index}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, height: 0 }}

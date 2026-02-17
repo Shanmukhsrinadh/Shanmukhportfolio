@@ -5,7 +5,6 @@ import { ArrowDown } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* Background with Parallax/Effect */}
       <div className="absolute inset-0 z-0">
         <motion.div 
             initial={{ scale: 1.1 }}
@@ -22,7 +21,6 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-background/0 via-background/20 to-background" />
       </div>
 
-      {/* Content */}
       <div className="container relative z-10 px-6 pt-20">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -36,7 +34,7 @@ export default function Hero() {
             transition={{ delay: 0.5, duration: 0.8 }}
             className="text-primary font-medium tracking-widest mb-4 uppercase"
           >
-            Digital Designer & Developer
+            Shanmukh Srinadh
           </motion.p>
           
           <h1 className="text-6xl md:text-8xl lg:text-9xl font-display font-bold leading-tight mb-8">
@@ -47,7 +45,7 @@ export default function Hero() {
                     transition={{ delay: 0.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="block"
                 >
-                    CRAFTING
+                    SHAPING
                 </motion.span>
             </span>
             <span className="block overflow-hidden text-white/50 dark:text-white/50">
@@ -57,7 +55,7 @@ export default function Hero() {
                     transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="block"
                 >
-                    DIGITAL
+                    MODERN
                 </motion.span>
             </span>
             <span className="block overflow-hidden">
@@ -67,7 +65,7 @@ export default function Hero() {
                     transition={{ delay: 0.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                     className="block"
                 >
-                    STORIES
+                    WEBSITES
                 </motion.span>
             </span>
           </h1>
@@ -79,12 +77,12 @@ export default function Hero() {
             className="flex flex-col md:flex-row gap-8 items-start md:items-center mt-12"
           >
             <p className="max-w-md text-lg text-muted-foreground leading-relaxed">
-              I build immersive web experiences that combine premium design with cutting-edge performance.
+              I am a UI/UX Designer and Web Developer focused on building seamless digital experiences.
             </p>
             
             <a href="#projects" className="group flex items-center gap-4 text-foreground font-medium">
               <span className="relative">
-                View Projects
+                My Work
                 <span className="absolute -bottom-1 left-0 w-0 h-px bg-foreground transition-all group-hover:w-full" />
               </span>
               <div className="w-8 h-8 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-white group-hover:text-black transition-all">
@@ -95,7 +93,6 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { Send, Mail, MapPin } from "lucide-react";
+import { Send, Mail, MapPin, Phone } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name is required"),
@@ -31,18 +31,11 @@ export default function Contact() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    
-    // Simulate EmailJS call
-    console.log("Sending email...", values);
-    
-    // Placeholder for actual EmailJS logic:
-    // emailjs.send(SERVICE_ID, TEMPLATE_ID, values, PUBLIC_KEY)...
-
     setTimeout(() => {
         setIsSubmitting(false);
         toast({
             title: "Message Sent!",
-            description: "Thanks for reaching out. I'll get back to you soon.",
+            description: "Thanks for reaching out, Shanmukh will get back to you soon.",
         });
         form.reset();
     }, 1500);
@@ -52,37 +45,40 @@ export default function Contact() {
     <section id="contact" className="py-32 bg-background relative overflow-hidden">
       <div className="container px-6 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            
-            {/* Contact Info */}
             <div>
                 <motion.h2 
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     className="text-5xl md:text-7xl font-display font-bold mb-8"
                 >
-                    Let's work <br /> <span className="text-primary">together.</span>
+                    Get in <br /> <span className="text-primary">Touch.</span>
                 </motion.h2>
                 <p className="text-xl text-muted-foreground mb-12 max-w-md">
-                    Have a project in mind? Let's build something extraordinary.
+                    I'd love to hear from you! Whether you have a question, want to discuss a project, or just want to connect.
                 </p>
 
                 <div className="space-y-6">
-                    <a href="mailto:hello@alexmorgan.design" className="flex items-center gap-4 text-lg hover:text-primary transition-colors">
+                    <a href="mailto:shanmukhsrinadh01@gmail.com" className="flex items-center gap-4 text-lg hover:text-primary transition-colors">
                         <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
                             <Mail className="w-5 h-5" />
                         </div>
-                        hello@alexmorgan.design
+                        shanmukhsrinadh01@gmail.com
                     </a>
+                    <div className="flex items-center gap-4 text-lg text-muted-foreground">
+                        <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                            <Phone className="w-5 h-5" />
+                        </div>
+                        (+91) 9550563283
+                    </div>
                     <div className="flex items-center gap-4 text-lg text-muted-foreground">
                         <div className="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
                             <MapPin className="w-5 h-5" />
                         </div>
-                        San Francisco, CA
+                        Visakhapatnam, Andhra pradesh, India
                     </div>
                 </div>
             </div>
 
-            {/* Form */}
             <motion.div 
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
@@ -98,7 +94,7 @@ export default function Contact() {
                                 <FormItem>
                                     <FormLabel>Name</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="John Doe" {...field} className="bg-background/50 border-white/10 h-12 focus:border-primary/50 transition-colors" />
+                                        <Input placeholder="Your Name" {...field} className="bg-background/50 border-white/10 h-12" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -111,7 +107,7 @@ export default function Contact() {
                                 <FormItem>
                                     <FormLabel>Email</FormLabel>
                                     <FormControl>
-                                        <Input placeholder="john@example.com" {...field} className="bg-background/50 border-white/10 h-12 focus:border-primary/50 transition-colors" />
+                                        <Input placeholder="your@email.com" {...field} className="bg-background/50 border-white/10 h-12" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -124,7 +120,7 @@ export default function Contact() {
                                 <FormItem>
                                     <FormLabel>Message</FormLabel>
                                     <FormControl>
-                                        <Textarea placeholder="Tell me about your project..." {...field} className="bg-background/50 border-white/10 min-h-[150px] resize-none focus:border-primary/50 transition-colors" />
+                                        <Textarea placeholder="How can I help you?" {...field} className="bg-background/50 border-white/10 min-h-[150px]" />
                                     </FormControl>
                                     <FormMessage />
                                 </FormItem>
@@ -135,11 +131,7 @@ export default function Contact() {
                             disabled={isSubmitting}
                             className="w-full h-12 text-lg font-medium"
                         >
-                            {isSubmitting ? "Sending..." : (
-                                <span className="flex items-center gap-2">
-                                    Send Message <Send className="w-4 h-4" />
-                                </span>
-                            )}
+                            {isSubmitting ? "Sending..." : "Send Message"}
                         </Button>
                     </form>
                 </Form>

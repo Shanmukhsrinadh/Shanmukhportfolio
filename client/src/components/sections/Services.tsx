@@ -1,21 +1,21 @@
 import { motion } from "framer-motion";
-import { PenTool, Laptop, Megaphone } from "lucide-react";
+import { Globe, Layout, Camera } from "lucide-react";
 
 const services = [
   {
-    title: "UI/UX Design",
-    description: "Creating intuitive and visually stunning interfaces that users love.",
-    icon: PenTool,
+    title: "Web Design",
+    description: "I design responsive, visually appealing websites that enhance user engagement and align with your brand.",
+    icon: Layout,
   },
   {
     title: "Web Development",
-    description: "Building fast, responsive, and scalable websites with modern tech.",
-    icon: Laptop,
+    description: "I build efficient, functional websites with seamless performance and user-friendly navigation.",
+    icon: Globe,
   },
   {
-    title: "Digital Strategy",
-    description: "Helping brands grow with data-driven marketing and SEO strategies.",
-    icon: Megaphone,
+    title: "Photography",
+    description: "I capture high-quality, expressive images that tell stories and showcase your unique vision.",
+    icon: Camera,
   },
 ];
 
@@ -37,7 +37,7 @@ export default function Services() {
                 transition={{ delay: 0.2 }}
                 className="max-w-2xl mx-auto text-muted-foreground"
             >
-                I help ambitious brands elevate their digital presence through design and technology.
+                Specialized in creating high-quality digital experiences and visual content.
             </motion.p>
         </div>
 
@@ -51,7 +51,6 @@ export default function Services() {
                     whileHover={{ y: -10 }}
                     className="group relative p-8 rounded-2xl bg-background border border-white/5 hover:border-primary/50 transition-colors duration-300"
                 >
-                    {/* Hover Gradient Glow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
                     
                     <div className="relative z-10">

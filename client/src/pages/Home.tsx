@@ -23,7 +23,7 @@ export default function Home() {
       </main>
 
       <footer className="py-8 text-center text-sm text-muted-foreground border-t border-white/5">
-        <p>© 2026 Alex Morgan. Built with React & Framer Motion.</p>
+        <p>© 2026 Shanmukh Srinadh. Crafted with Design Excellence.</p>
       </footer>
     </div>
   );
