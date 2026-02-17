@@ -11,8 +11,8 @@ export default function CursorFollower() {
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX - 16);
-      cursorY.set(e.clientY - 16);
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
     window.addEventListener("mousemove", moveCursor);
@@ -23,11 +23,14 @@ export default function CursorFollower() {
 
   return (
     <motion.div
-      className="fixed left-0 top-0 w-8 h-8 rounded-full border border-white/50 bg-white/10 backdrop-blur-sm pointer-events-none z-50 mix-blend-difference"
+      className="fixed left-0 top-0 w-8 h-8 rounded-full border border-white/50 bg-white/10 backdrop-blur-sm pointer-events-none z-100 mix-blend-difference"
       style={{
-        translateX: cursorXSpring,
-        translateY: cursorYSpring,
+        x: cursorXSpring,
+        y: cursorYSpring,
+        translateX: "-50%",
+        translateY: "-50%",
       }}
+
     />
   );
 }

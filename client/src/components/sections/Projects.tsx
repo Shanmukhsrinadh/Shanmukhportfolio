@@ -26,7 +26,7 @@ export default function Projects() {
 
   return (
     <section id="projects" className="py-32 bg-background min-h-screen relative">
-      <div className="container px-6 relative z-10">
+        <div className="w-full px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
             <h2 className="text-5xl md:text-7xl font-display font-bold">
                 My <br /> <span className="text-white/30">Work</span>

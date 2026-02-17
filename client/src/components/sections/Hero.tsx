@@ -13,15 +13,14 @@ export default function Hero() {
   return (
     <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-black">
       {/* Spline 3D Background */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         <spline-viewer 
           url="https://prod.spline.design/5FhkalGo8zOKwTsh/scene.splinecode"
-          class="w-full h-full"
+          class="w-full h-full scale-125"
           loading-anim-type="none"
         ></spline-viewer>
-        {/* Subtle overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-background" />
       </div>
+
 
       {/* Content */}
       <div className="container relative z-10 px-6 pt-20 pointer-events-none">
