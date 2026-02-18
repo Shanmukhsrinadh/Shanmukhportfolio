@@ -14,15 +14,13 @@ const projects = [
   { id: 9, category: "Figma", title: "Timber Oak App", image: "https://i.ibb.co/VcsX0wHG/Untitled-1.jpg", link: "https://www.figma.com/proto/ac8saGZ1ybu6zHQljHKavE/Untitled?node-id=15-1430" },
 ];
 
-const categories = ["All", "Figma", "Design", "Development", "WordPress"];
+const categories = ["Figma", "Design", "Development", "WordPress"];
 
 export default function Projects() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("Figma");
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   
-  const filteredProjects = activeCategory === "All" 
-    ? projects 
-    : projects.filter(p => p.category === activeCategory);
+  const filteredProjects = projects.filter(p => p.category === activeCategory);
 
   return (
     <section id="projects" className="py-32 bg-background min-h-screen relative">
