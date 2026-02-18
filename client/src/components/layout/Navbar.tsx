@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
@@ -14,7 +14,6 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     
-    // Initialize theme
     if (document.documentElement.classList.contains("light")) {
         setTheme("light");
     }
@@ -35,6 +34,10 @@ export default function Navbar() {
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ];
+
+  const handleResumeDownload = () => {
+    window.open("https://drive.google.com/file/d/1QT1MQjPJK7pzxHusaM2NYgJe8AuMjo12/view", "_blank");
+  };
 
   return (
     <nav
@@ -59,6 +62,15 @@ export default function Navbar() {
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
             </a>
           ))}
+          <Button
+            onClick={handleResumeDownload}
+            variant="outline"
+            size="sm"
+            className="rounded-full border-primary/20 hover:border-primary/50 group"
+          >
+            <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
+            Resume
+          </Button>
           <Button
             variant="ghost"
             size="icon"
@@ -105,6 +117,14 @@ export default function Navbar() {
                   {link.name}
                 </a>
               ))}
+              <Button
+                onClick={handleResumeDownload}
+                variant="outline"
+                className="w-full rounded-full"
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Resume
+              </Button>
             </div>
           </motion.div>
         )}
