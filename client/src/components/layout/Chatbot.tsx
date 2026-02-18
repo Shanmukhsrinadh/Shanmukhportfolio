@@ -13,7 +13,7 @@ export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hey! I'm Shanmukh's digital assistant. How's your day going? Feel free to ask me anything about my projects or design journey!" }
+    { role: "assistant", content: "Hey! I'm Snowflex, Shanmukh's digital assistant. How's your day going? Feel free to ask me anything about my projects or design journey!" }
   ]);
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -94,7 +94,7 @@ export default function Chatbot() {
                   <Bot className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold">Shanmukh AI</p>
+                  <p className="text-sm font-bold">Snowflex</p>
                   <p className="text-[10px] text-muted-foreground flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" /> Active
                   </p>

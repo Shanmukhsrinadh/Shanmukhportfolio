@@ -1,6 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Figma,
+  Github,
+  PenTool,
+  Globe,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const projects = [
   { id: 1, category: "Design", title: "Unseen Stories", image: "https://i.ibb.co/L5h8xDB/Screenshot-2024-11-01-222502.png", link: "https://shanmukhsrinadh.github.io/Unseen-stories/" },
@@ -19,78 +28,138 @@ const categories = ["Figma", "Design", "Development", "WordPress"];
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("Figma");
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
-  
-  const filteredProjects = projects.filter(p => p.category === activeCategory);
+  const [showAll, setShowAll] = useState(false);
+
+  const filteredProjects = projects.filter(
+    (p) => p.category === activeCategory
+  );
+
+  const visibleProjects =
+    showAll || filteredProjects.length <= 2
+      ? filteredProjects
+      : filteredProjects.slice(0, 2);
+
+  // Reset collapse when category changes
+  useEffect(() => {
+    setShowAll(false);
+  }, [activeCategory]);
+
+  const getCategoryIcon = (category: string) => {
+    switch (category) {
+      case "Figma":
+        return <Figma className="w-5 h-5" />;
+      case "Development":
+        return <Github className="w-5 h-5" />;
+      case "Design":
+        return <PenTool className="w-5 h-5" />;
+      case "WordPress":
+        return <Globe className="w-5 h-5" />;
+      default:
+        return <ArrowUpRight className="w-5 h-5" />;
+    }
+  };
 
   return (
     <section id="projects" className="py-32 bg-background min-h-screen relative">
-        <div className="w-full px-6">
+      <div className="w-full px-6">
+
+        {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-            <h2 className="text-5xl md:text-7xl font-display font-bold">
-                My <br /> <span className="text-white/30">Work</span>
-            </h2>
+          <h2 className="text-5xl md:text-7xl font-display font-bold">
+            My <br /> <span className="text-white/30">Work</span>
+          </h2>
 
-            <div className="flex flex-wrap gap-4">
-                {categories.map((cat) => (
-                    <button
-                        key={cat}
-                        onClick={() => setActiveCategory(cat)}
-                        className={`text-sm uppercase tracking-wider px-4 py-2 rounded-full border transition-all ${
-                            activeCategory === cat 
-                                ? "border-primary bg-primary text-background" 
-                                : "border-white/10 hover:border-white/30 text-muted-foreground"
-                        }`}
-                    >
-                        {cat}
-                    </button>
-                ))}
-            </div>
+          <div className="flex flex-wrap gap-4">
+            {categories.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`text-sm uppercase tracking-wider px-4 py-2 rounded-full border transition-all ${
+                  activeCategory === cat
+                    ? "border-primary bg-primary text-background"
+                    : "border-white/10 hover:border-white/30 text-muted-foreground"
+                }`}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
         </div>
 
+        {/* Projects List */}
         <div className="flex flex-col">
-            <AnimatePresence mode="wait">
-                {filteredProjects.map((project) => (
-                    <motion.div
-                        key={project.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.3 }}
-                        onMouseEnter={() => setHoveredProject(project.id)}
-                        onMouseLeave={() => setHoveredProject(null)}
-                        onClick={() => window.open(project.link, "_blank")}
-                        className="group relative border-t border-white/10 py-12 cursor-pointer flex justify-between items-center"
-                    >
-                        <div className="relative z-10 transition-transform duration-300 group-hover:translate-x-4">
-                            <span className="text-xs text-primary mb-2 block">{project.category}</span>
-                            <h3 className="text-3xl md:text-5xl font-display font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                                {project.title}
-                            </h3>
-                        </div>
+          <AnimatePresence mode="wait">
+            {visibleProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+                onMouseEnter={() => setHoveredProject(project.id)}
+                onMouseLeave={() => setHoveredProject(null)}
+                onClick={() => window.open(project.link, "_blank")}
+                className="group relative border-t border-white/10 py-12 cursor-pointer flex justify-between items-center"
+              >
+                {/* Left Content */}
+                <div className="relative z-10 transition-transform duration-300 group-hover:translate-x-4">
+                  <span className="text-xs text-primary mb-2 block">
+                    {project.category}
+                  </span>
+                  <h3 className="text-3xl md:text-5xl font-display font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+                    {project.title}
+                  </h3>
+                </div>
 
-                        <div className="relative z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                             <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white text-black">
-                                <ArrowUpRight className="w-5 h-5" />
-                             </div>
-                        </div>
+                {/* Right Icon (always visible) */}
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white text-black group-hover:bg-primary group-hover:text-background transition-all">
+                    {getCategoryIcon(project.category)}
+                  </div>
+                </div>
 
-                        {hoveredProject === project.id && (
-                             <motion.div 
-                                layoutId="project-preview"
-                                className="absolute right-20 top-1/2 -translate-y-1/2 w-[400px] h-[250px] rounded-lg overflow-hidden pointer-events-none hidden lg:block z-0"
-                                initial={{ opacity: 0, scale: 0.8 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.8 }}
-                             >
-                                <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
-                                <div className="absolute inset-0 bg-black/20" />
-                             </motion.div>
-                        )}
-                    </motion.div>
-                ))}
-            </AnimatePresence>
-            <div className="border-t border-white/10" />
+                {/* Hover Image Preview */}
+                {hoveredProject === project.id && (
+                  <motion.div
+                    layoutId="project-preview"
+                    className="absolute right-20 top-1/2 -translate-y-1/2 w-[400px] h-[250px] rounded-lg overflow-hidden pointer-events-none hidden lg:block z-0"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.8 }}
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
+                  </motion.div>
+                )}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+
+          <div className="border-t border-white/10" />
         </div>
+
+        {/* View More / Collapse */}
+        {filteredProjects.length > 2 && (
+          <div className="mt-10 flex justify-center">
+            <Button
+              variant="ghost"
+              onClick={() => setShowAll(!showAll)}
+              className="group"
+            >
+              {showAll ? "View Less" : "View All Projects"}
+              {showAll ? (
+                <ChevronUp className="ml-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+              ) : (
+                <ChevronDown className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
+              )}
+            </Button>
+          </div>
+        )}
+
       </div>
     </section>
   );
