@@ -18,6 +18,9 @@ export default function Chatbot() {
   const [isLoading, setIsLoading] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Using the provided key directly as requested, ensuring no backend is used.
+  const API_KEY = "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";
+
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -37,7 +40,7 @@ export default function Chatbot() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer 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",
+          "Authorization": `Bearer ${API_KEY}`,
           "HTTP-Referer": window.location.origin,
           "X-Title": "Shanmukh Portfolio Assistant"
         },
@@ -46,7 +49,7 @@ export default function Chatbot() {
           messages: [
             { 
               role: "system", 
-              content: "You are Shanmukh Srinadh's personal assistant. Talk like a real human: friendly, casual, and professional. Avoid using markdown formatting like bolding with stars (**), hashtags (#), or lists unless absolutely necessary. Keep responses concise and conversational. If someone asks about Shanmukh, tell them he's a UI/UX Designer and Web Developer from Visakhapatnam who loves creating seamless digital stories. Don't act like a search engine; act like a friend representing him." 
+              content: "You are Shanmukh Srinadh's personal assistant named Snowflex. Talk like a real human: friendly, casual, and professional. Avoid using markdown formatting like bolding with stars (**), hashtags (#), or lists unless absolutely necessary. Keep responses concise and conversational. If someone asks about Shanmukh, tell them he's a UI/UX Designer and Web Developer from Visakhapatnam who loves creating seamless digital stories. Don't act like a search engine; act like a friend representing him." 
             },
             ...messages,
             userMessage
