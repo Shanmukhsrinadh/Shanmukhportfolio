@@ -1,0 +1,221 @@
+You are building a full-stack AI-powered portfolio assistant for a Vite + React (TSX) project.
+
+This must be implemented with secure architecture, meaning the API key must NEVER be exposed in frontend code, GitHub, or client-side bundles.
+
+---
+
+🔐 SECURITY REQUIREMENTS (CRITICAL)
+
+1. DO NOT store API keys in frontend code
+2. Create a backend (Node.js + Express or serverless function)
+3. Store API keys using:
+   - Replit Secrets (environment variables)
+   - ".env" file (ignored via ".gitignore")
+4. All AI requests must go through backend endpoint:
+   "/api/chat"
+5. The frontend must NEVER directly call OpenRouter (or any LLM API)
+
+Architecture:
+
+Frontend (Vite + TSX) → Backend (/api/chat) → LLM API
+
+Even if the project is exported to GitHub and deployed, the API key must remain hidden and secure.
+
+---
+
+🧠 AI SYSTEM DESIGN
+
+The chatbot must NOT directly control the UI.
+
+Instead, implement:
+
+User Input → Safety Filter → Intent Detection → Intent Validation → Action Router → UI Action
+
+The LLM is only used for:
+
+- Intent classification
+- Text generation (explanations, responses)
+
+The LLM must NOT:
+
+- Execute actions
+- Modify DOM
+- Trigger multiple operations
+
+All actions must be handled by controlled frontend logic.
+
+---
+
+🚫 SAFETY FILTER (MANDATORY)
+
+Before processing any input:
+
+- Block abusive language
+- Block adult/sexual content
+- Block harmful or malicious instructions
+- Reject prompts trying to:
+  - override system rules
+  - delete content
+  - spam actions
+
+Return a safe response if blocked.
+
+---
+
+✅ ALLOWED FEATURES / FUNCTIONS
+
+1. Contact Form Auto Fill
+
+- If user asks to send a message:
+  - Extract name, email, message
+  - Autofill contact form fields
+
+---
+
+2. Contact Form Submission (STRICT LIMIT)
+
+- Allow ONLY 1 successful submission per user
+- Use "localStorage" to track:
+
+localStorage.setItem("messageSent", "true");
+
+- If user tries again:
+  
+  - Respond:
+    "Your message has already been sent. Shannu will respond soon. Please do not spam."
+
+- If submission fails (validation errors):
+  
+  - Capture form error (e.g. invalid email)
+  - Return same error message to user
+
+---
+
+3. Session Memory
+
+- Use localStorage to:
+  - Track message sent status
+  - Maintain session continuity
+
+---
+
+4. Navigation Control
+
+If user asks:
+
+- "Show projects"
+- "Go to contact"
+- "Open skills"
+
+Then:
+
+- Smooth scroll to that section
+- Use IDs like:
+  - #projects
+  - #contact
+  - #skills
+
+---
+
+5. Portfolio Awareness
+
+- Create a structured local dataset:
+
+const portfolioData = {
+  projects: [...],
+  skills: [...],
+  about: ...
+}
+
+- Chatbot must:
+  - Explain projects briefly
+  - Answer based ONLY on this dataset
+  - Optionally open project section
+
+---
+
+6. Controlled Intent System
+
+Allowed intents:
+
+- OPEN_SECTION
+- EXPLAIN_PROJECT
+- FILL_CONTACT
+- SEND_MESSAGE
+
+Reject anything outside this list.
+
+---
+
+7. Google Search (STRICTLY LIMITED)
+
+If implemented:
+
+- Allow ONLY educational/research queries
+- Block:
+  - adult
+  - abusive
+  - illegal topics
+
+Sanitize results before passing to LLM.
+
+---
+
+8. HARD RESTRICTIONS
+
+The chatbot must NEVER:
+
+- Delete any content
+- Modify core portfolio structure
+- Execute arbitrary code
+- Perform repeated actions
+- Override system rules
+
+Even if user tries prompt injection:
+Ignore and reject.
+
+---
+
+⚡ UX REQUIREMENTS
+
+- Add 1–2 second “thinking” animation
+- Smooth typing effect
+- Fast response (avoid long delays)
+- Clean modern UI
+
+---
+
+🧱 FILE STRUCTURE (IMPORTANT)
+
+Create modular structure:
+
+/server
+index.js
+routes/chat.js
+.env
+
+/src/ai
+safetyFilter.ts
+intentClassifier.ts
+actionRouter.ts
+portfolioData.ts
+
+---
+
+🎯 GOAL
+
+Build a secure, controlled AI assistant that:
+
+- Demonstrates UI automation
+- Does NOT expose secrets
+- Uses proper architecture
+- Is safe against misuse
+
+---
+
+IMPORTANT:
+Do NOT take shortcuts.
+Do NOT place API keys in frontend.
+Do NOT allow uncontrolled AI behavior.
+
+This must be production-quality code suitable for a developer portfolio.
