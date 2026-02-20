@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
 import { Code, Figma, Palette, Globe, Layers, Layout, Image, Smartphone, Monitor, Database, Github } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const skills = [
   { name: "HTML & CSS", icon: Layout },
@@ -17,6 +18,7 @@ const skills = [
 ];
 
 export default function About() {
+  const [isMobile, setIsMobile] = useState(false);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -25,6 +27,13 @@ export default function About() {
   const smoothY = useSpring(mouseY, { stiffness: 150, damping: 20 });
 
   const gridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   return (
     <section id="about" className="py-32 relative bg-black overflow-hidden">
@@ -68,24 +77,26 @@ export default function About() {
             </motion.div>
           </div>
 
-          {/* Skills Grid with Perfect Cursor Light */}
+          {/* Skills Grid */}
           <div
             ref={gridRef}
-            className="relative group cursor-none"
+            className={`relative group ${isMobile ? "" : "cursor-none"}`}
             onMouseMove={(e) => {
-              const rect = e.currentTarget.getBoundingClientRect();
-              mouseX.set(e.clientX - rect.left);
-              mouseY.set(e.clientY - rect.top);
+              if (!isMobile) {
+                const rect = e.currentTarget.getBoundingClientRect();
+                mouseX.set(e.clientX - rect.left);
+                mouseY.set(e.clientY - rect.top);
+              }
             }}
           >
             {/* Base Grid */}
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 opacity-20 transition-opacity duration-500 group-hover:opacity-10">
+            <div className={`grid grid-cols-3 md:grid-cols-4 gap-4 transition-opacity duration-500 ${isMobile ? "opacity-100" : "opacity-20 group-hover:opacity-10"}`}>
               {skills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="aspect-square border border-white/20 flex flex-col items-center justify-center p-4"
+                  className={`aspect-square border flex flex-col items-center justify-center p-4 ${isMobile ? "bg-white/5 border-primary/30" : "border-white/20"}`}
                 >
-                  <skill.icon className="w-6 h-6 mb-2" />
+                  <skill.icon className={`w-6 h-6 mb-2 ${isMobile ? "text-primary" : ""}`} />
                   <span className="text-[10px] font-medium text-center">
                     {skill.name}
                   </span>
@@ -93,30 +104,32 @@ export default function About() {
               ))}
             </div>
 
-            {/* Light Reveal Layer */}
-            <motion.div
-              className="absolute inset-0 grid grid-cols-3 md:grid-cols-4 gap-4 pointer-events-none"
-              style={{
-                maskImage: useMotionTemplate`
-                  radial-gradient(150px circle at ${smoothX}px ${smoothY}px, black, transparent)
-                `,
-                WebkitMaskImage: useMotionTemplate`
-                  radial-gradient(150px circle at ${smoothX}px ${smoothY}px, black, transparent)
-                `,
-              }}
-            >
-              {skills.map((skill) => (
-                <div
-                  key={skill.name}
-                  className="aspect-square bg-white/5 border border-primary/50 flex flex-col items-center justify-center p-4 backdrop-blur-sm"
-                >
-                  <skill.icon className="w-8 h-8 mb-2 text-primary drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
-                  <span className="text-[10px] font-bold text-white tracking-widest uppercase text-center">
-                    {skill.name}
-                  </span>
-                </div>
-              ))}
-            </motion.div>
+            {/* Light Reveal Layer - Disabled on Mobile */}
+            {!isMobile && (
+              <motion.div
+                className="absolute inset-0 grid grid-cols-3 md:grid-cols-4 gap-4 pointer-events-none"
+                style={{
+                  maskImage: useMotionTemplate`
+                    radial-gradient(150px circle at ${smoothX}px ${smoothY}px, black, transparent)
+                  `,
+                  WebkitMaskImage: useMotionTemplate`
+                    radial-gradient(150px circle at ${smoothX}px ${smoothY}px, black, transparent)
+                  `,
+                }}
+              >
+                {skills.map((skill) => (
+                  <div
+                    key={skill.name}
+                    className="aspect-square bg-white/5 border border-primary/50 flex flex-col items-center justify-center p-4 backdrop-blur-sm"
+                  >
+                    <skill.icon className="w-8 h-8 mb-2 text-primary drop-shadow-[0_0_15px_rgba(255,255,255,0.5)]" />
+                    <span className="text-[10px] font-bold text-white tracking-widest uppercase text-center">
+                      {skill.name}
+                    </span>
+                  </div>
+                ))}
+              </motion.div>
+            )}
           </div>
 
         </div>

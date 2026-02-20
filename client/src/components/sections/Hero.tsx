@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
+import { useEffect, useState } from "react";
 
 declare global {
   namespace JSX {
@@ -10,11 +11,23 @@ declare global {
 }
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black flex items-center">
 
       {/* ========== Spline Background (Zoomed 10%) ========== */}
       <div className="absolute inset-0 z-0 overflow-hidden">
+          {/* @ts-ignore */}
         <spline-viewer
           url="https://prod.spline.design/5FhkalGo8zOKwTsh/scene.splinecode"
           class="w-full h-full scale-110"

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function CursorFollower() {
+  const [isMobile, setIsMobile] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
@@ -10,16 +11,31 @@ export default function CursorFollower() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || ('ontouchstart' in window));
+    };
+    
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
     const moveCursor = (e: MouseEvent) => {
-      cursorX.set(e.clientX);
-      cursorY.set(e.clientY);
+      if (!isMobile) {
+        cursorX.set(e.clientX);
+        cursorY.set(e.clientY);
+      }
     };
 
-    window.addEventListener("mousemove", moveCursor);
+    if (!isMobile) {
+      window.addEventListener("mousemove", moveCursor);
+    }
+
     return () => {
+      window.removeEventListener("resize", checkMobile);
       window.removeEventListener("mousemove", moveCursor);
     };
-  }, []);
+  }, [isMobile]);
+
+  if (isMobile) return null;
 
   return (
     <motion.div
@@ -30,7 +46,6 @@ export default function CursorFollower() {
         translateX: "-50%",
         translateY: "-50%",
       }}
-
     />
   );
 }
