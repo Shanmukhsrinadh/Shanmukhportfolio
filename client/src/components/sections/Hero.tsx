@@ -23,20 +23,20 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black flex items-center">
+    <section className="relative min-h-screen w-full overflow-hidden bg-black flex items-center py-20 md:py-0">
 
       {/* ========== Spline Background (Zoomed 10%) ========== */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           {/* @ts-ignore */}
         <spline-viewer
           url="https://prod.spline.design/5FhkalGo8zOKwTsh/scene.splinecode"
-          class="w-full h-full scale-110"
+          class="w-full h-full scale-150 md:scale-110"
           loading-anim-type="none"
         />
       </div>
 
       {/* Overlay (does NOT block interaction) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black pointer-events-none z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black pointer-events-none z-10" />
 
       {/* ========== Content ========== */}
       <div className="relative z-20 w-full px-6 md:px-12 lg:px-24">
@@ -46,7 +46,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-sm tracking-[0.3em] uppercase text-primary mb-6"
+            className="text-xs md:text-sm tracking-[0.3em] uppercase text-primary mb-4 md:mb-6"
           >
             Shanmukh Srinadh
           </motion.p>
@@ -55,7 +55,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 1 }}
-            className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.05]"
+            className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.1] md:leading-[1.05]"
           >
             Designing
             <br />
@@ -68,16 +68,16 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="mt-12 flex flex-col md:flex-row md:items-center gap-8"
+            className="mt-8 md:mt-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-8"
           >
-            <p className="max-w-md text-muted-foreground text-lg leading-relaxed">
+            <p className="max-w-md text-muted-foreground text-base md:text-lg leading-relaxed">
               UI/UX Designer & Web Developer crafting refined,
               human-centered interfaces with modern technologies.
             </p>
 
             <a
               href="#projects"
-              className="group inline-flex items-center gap-4 text-white font-medium"
+              className="group inline-flex items-center gap-4 text-white font-medium self-start md:self-auto"
             >
               <span className="relative">
                 View Projects
