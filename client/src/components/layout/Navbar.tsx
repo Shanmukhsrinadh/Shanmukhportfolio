@@ -105,37 +105,27 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border/50 overflow-hidden"
+            className="md:hidden bg-background border-b"
           >
-            <div className="container mx-auto px-6 py-8 flex flex-col space-y-6">
-              {navLinks.map((link, i) => (
-                <motion.a
+            <div className="container mx-auto px-6 py-8 flex flex-col space-y-4">
+              {navLinks.map((link) => (
+                <a
                   key={link.name}
                   href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="text-2xl font-display font-medium hover:text-primary transition-colors"
+                  className="text-lg font-medium hover:text-primary"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
-                </motion.a>
+                </a>
               ))}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-                className="pt-4"
+              <Button
+                onClick={handleResumeDownload}
+                variant="outline"
+                className="w-full rounded-full"
               >
-                <Button
-                  onClick={handleResumeDownload}
-                  variant="outline"
-                  className="w-full rounded-full py-6 text-lg border-primary/20"
-                >
-                  <Download className="mr-2 h-5 w-5" />
-                  Resume
-                </Button>
-              </motion.div>
+                <Download className="mr-2 h-4 w-4" />
+                Resume
+              </Button>
             </div>
           </motion.div>
         )}

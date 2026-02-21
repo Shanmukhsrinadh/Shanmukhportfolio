@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageSquare, X, Send, Bot } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 
 interface Message {
   role: "user" | "assistant";
@@ -14,20 +13,10 @@ export default function Chatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hey! I'm Snowflex, Shanmukh's digital assistant. How can I help you explore the portfolio today?" }
+    { role: "assistant", content: "Hey! I'm Shanmukh's digital assistant. How's your day going? Feel free to ask me anything about my projects or design journey!" }
   ]);
   const [isLoading, setIsLoading] = useState(false);
-  const [hasSentSuccessfulMessage, setHasSentSuccessfulMessage] = useState(false);
-  const [formState, setFormState] = useState<{
-    step: 'none' | 'name' | 'email' | 'phone' | 'message' | 'confirm';
-    data: { name: string; email: string; phone: string; message: string };
-  }>({
-    step: 'none',
-    data: { name: "", email: "", phone: "", message: "" }
-  });
-
   const scrollRef = useRef<HTMLDivElement>(null);
-  const { toast } = useToast();
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -35,108 +24,49 @@ export default function Chatbot() {
     }
   }, [messages]);
 
-  const scrollToSection = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
-    const userText = input.trim();
-    const userMessage: Message = { role: "user", content: userText };
+    const userMessage: Message = { role: "user", content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
 
-    setTimeout(() => {
-      let botResponse = "";
-      const lowerInput = userText.toLowerCase();
+    try {
+      const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer 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",
+          "HTTP-Referer": window.location.origin,
+          "X-Title": "Shanmukh Portfolio Assistant"
+        },
+        body: JSON.stringify({
+          model: "deepseek/deepseek-chat",
+          messages: [
+            { 
+              role: "system", 
+              content: "You are Shanmukh Srinadh's personal assistant. Talk like a real human: friendly, casual, and professional. Avoid using markdown formatting like bolding with stars (**), hashtags (#), or lists unless absolutely necessary. Keep responses concise and conversational. If someone asks about Shanmukh, tell them he's a UI/UX Designer and Web Developer from Visakhapatnam who loves creating seamless digital stories. Don't act like a search engine; act like a friend representing him." 
+            },
+            ...messages,
+            userMessage
+          ]
+        })
+      });
 
-      // Form Collection Logic
-      if (formState.step !== 'none') {
-        const nextState = { ...formState };
-        
-        if (formState.step === 'name') {
-          nextState.data.name = userText;
-          nextState.step = 'email';
-          botResponse = `Got it, ${userText}. What's your email address?`;
-        } else if (formState.step === 'email') {
-          nextState.data.email = userText;
-          nextState.step = 'phone';
-          botResponse = "Thanks! And your phone number?";
-        } else if (formState.step === 'phone') {
-          nextState.data.phone = userText;
-          nextState.step = 'message';
-          botResponse = "Great. Finally, what would you like to say to Shanmukh?";
-        } else if (formState.step === 'message') {
-          nextState.data.message = userText;
-          nextState.step = 'confirm';
-          botResponse = `Ready to send this message?\n\nName: ${nextState.data.name}\nEmail: ${nextState.data.email}\nPhone: ${nextState.data.phone}\nMessage: ${userText}\n\nType 'yes' to send!`;
-        } else if (formState.step === 'confirm') {
-          if (lowerInput.includes('yes')) {
-            if (hasSentSuccessfulMessage) {
-              botResponse = "You've already sent a message successfully! To prevent spam, I can only send one message per session. You can use the contact form directly if you need to send another.";
-              nextState.step = 'none';
-            } else {
-              // Simulate form submission
-              botResponse = "Sending your message now...";
-              
-              // Trigger the actual contact form logic if possible or just show success
-              setTimeout(() => {
-                setMessages(prev => [...prev, { role: "assistant", content: "Success! Your message has been sent to Shanmukh. He'll get back to you soon!" }]);
-                setHasSentSuccessfulMessage(true);
-                toast({
-                  title: "Message Sent via Chat!",
-                  description: "Shanmukh will get back to you soon.",
-                });
-              }, 1500);
-              nextState.step = 'none';
-            }
-          } else {
-            botResponse = "Cancelled. How else can I help you navigate?";
-            nextState.step = 'none';
-          }
-        }
-        setFormState(nextState);
-      } 
-      // Navigation & Keyword Logic
-      else if (lowerInput.match(/\b(hi|hello|hey|greetings)\b/)) {
-        botResponse = "Hello there! 😊 I'm Snowflex. I can help you navigate the portfolio or even help you send a message to Shanmukh. What's on your mind?";
-      } else if (lowerInput.match(/\b(contact|message|reach out|get in touch|mail)\b/)) {
-        if (hasSentSuccessfulMessage) {
-          botResponse = "You've already sent a message! Taking you to the contact section if you want to see Shanmukh's details.";
-          setTimeout(() => scrollToSection('#contact'), 500);
-        } else {
-          botResponse = "I can help you with that! Let's start with your name.";
-          setFormState({ ...formState, step: 'name' });
-        }
-      } else if (lowerInput.match(/\b(services|service|offerings)\b/)) {
-        botResponse = "Taking you to the Services section...";
-        setTimeout(() => scrollToSection('#services'), 500);
-      } else if (lowerInput.match(/\b(about|skills|who is he)\b/)) {
-        botResponse = "Taking you to the About section...";
-        setTimeout(() => scrollToSection('#about'), 500);
-      } else if (lowerInput.match(/\b(projects|works|work|project)\b/)) {
-        botResponse = "Showing you some of Shanmukh's best work...";
-        setTimeout(() => scrollToSection('#projects'), 500);
-      } else if (lowerInput.match(/\b(certifications|certificate)\b/)) {
-        botResponse = "Heading over to Certifications...";
-        setTimeout(() => scrollToSection('#certifications'), 500);
-      } else if (lowerInput.match(/\b(resume|cv)\b/)) {
-        botResponse = "Opening Shanmukh's resume for you!";
-        window.open('https://drive.google.com/file/d/1QT1MQjPJK7pzxHusaM2NYgJe8AuMjo12/view?usp=sharing', '_blank');
-      } else {
-        botResponse = "I can help you navigate! Try asking about: Projects, About, Services, Certifications, or say 'Contact' to send a message.";
-      }
-
-      if (botResponse) {
-        setMessages(prev => [...prev, { role: "assistant", content: botResponse }]);
-      }
+      const data = await response.json();
+      let assistantMessage = data.choices[0].message.content;
+      
+      // Post-process to remove excessive markdown just in case the model forgets
+      assistantMessage = assistantMessage.replace(/\*\*/g, '').replace(/###/g, '').replace(/##/g, '').replace(/#/g, '');
+      
+      setMessages(prev => [...prev, { role: "assistant", content: assistantMessage }]);
+    } catch (error) {
+      console.error("Chat Error:", error);
+      setMessages(prev => [...prev, { role: "assistant", content: "Oops, something went wrong on my end. Mind trying again in a bit?" }]);
+    } finally {
       setIsLoading(false);
-    }, 800);
+    }
   };
 
   return (
@@ -164,7 +94,7 @@ export default function Chatbot() {
                   <Bot className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold">Snowflex</p>
+                  <p className="text-sm font-bold">Shanmukh AI</p>
                   <p className="text-[10px] text-muted-foreground flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" /> Active
                   </p>
@@ -181,7 +111,7 @@ export default function Chatbot() {
             >
               {messages.map((msg, idx) => (
                 <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
-                  <div className={`max-w-[85%] p-3 rounded-2xl text-sm whitespace-pre-wrap leading-relaxed ${
+                  <div className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${
                     msg.role === "user" 
                       ? "bg-primary text-primary-foreground rounded-tr-none" 
                       : "bg-secondary text-foreground rounded-tl-none border border-border"
