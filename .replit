@@ -9,6 +9,10 @@ channel = "stable-24_05"
 localPort = 5000
 externalPort = 80
 
+[[ports]]
+localPort = 5001
+externalPort = 3000
+
 [env]
 PORT = "5000"
 
@@ -41,3 +45,4 @@ waitForPort = 5000
 [agent]
 stack = "MOCKUP_JS"
 mockupState = "MOCKUP"
+expertMode = true

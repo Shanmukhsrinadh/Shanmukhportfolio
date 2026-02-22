@@ -1,0 +1,155 @@
+[33mcommit fc16cccb228a3f9c70022038a21cd578596d4917[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Sat Feb 21 18:22:39 2026 +0000
+
+    Saved progress at the end of the loop
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: a4704aa1-e065-47d8-b4c6-57a7d2ed838d
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: 2685726b-4858-44d6-bd36-b058c360c053
+    Replit-Helium-Checkpoint-Created: true
+
+[33mcommit 414f84918594ac0a3952960ebedef7fcaf9d2438[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Sat Feb 21 18:03:41 2026 +0000
+
+    Improve mobile website layout and navigation appearance
+    
+    Adjusted hero section scaling, typography, and padding for mobile. Enhanced mobile navigation with blur effects and animations. Changed screen height constraints to `min-h-screen` for better content display on mobile devices. Updated environment variables and toolchain configurations.
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: a4704aa1-e065-47d8-b4c6-57a7d2ed838d
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: 2d57a435-3dcd-415c-8720-89ceeacaf61c
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/6e02a673-1784-4305-9d47-08c527193e47/a4704aa1-e065-47d8-b4c6-57a7d2ed838d/MMp18Mu
+    Replit-Helium-Checkpoint-Created: true
+
+[33mcommit 1965a611d96e795f2dba9241bd1927a8e2ee9460[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Fri Feb 20 22:51:41 2026 +0000
+
+    Update agent state and log query database files
+    
+    Update agent state and log query database files.
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: a4704aa1-e065-47d8-b4c6-57a7d2ed838d
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: 63df5f65-a445-4d18-9166-d091f39bf6fc
+    Replit-Helium-Checkpoint-Created: true
+
+[33mcommit 5b0f8dd955d3eb94c180178e00a352c8480fa112[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Fri Feb 20 22:50:25 2026 +0000
+
+    Saved your changes before starting work
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: a4704aa1-e065-47d8-b4c6-57a7d2ed838d
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: 45f6a0a2-3429-4861-aa66-377789e75063
+
+[33mcommit f47d38747670f6f748a0f33bb0f7d67018e85deb[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Fri Feb 20 17:53:03 2026 +0000
+
+    Fix an error that causes a 404 page not found when accessing the application
+    
+    Update routing configuration in `client/src/App.tsx` to correctly handle the `/Shanmukhportfolio/` base path, resolving 404 errors.
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: 2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: 6b1e2265-bede-442c-b7bd-886dc71dd9c9
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/6e02a673-1784-4305-9d47-08c527193e47/2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a/DQLmS3o
+    Replit-Helium-Checkpoint-Created: true
+
+[33mcommit a017258dad0b23bbdabab057483b03fe0629359d[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Fri Feb 20 17:52:00 2026 +0000
+
+    Enable chatbot to fill contact form and optimize mobile performance
+    
+    Refactors Chatbot.tsx to handle form filling and submission with spam prevention, and updates CursorFollower.tsx and About.tsx to conditionally disable effects on mobile devices. Also adds @ts-ignore to Spline viewer in Hero.tsx.
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: 2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: b4d083b9-e419-4b8c-b490-4f1c65bec0c8
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/6e02a673-1784-4305-9d47-08c527193e47/2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a/DQLmS3o
+    Replit-Helium-Checkpoint-Created: true
+
+[33mcommit 97fcbeb652683e89926c44dbc6ca699343119538[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Fri Feb 20 17:46:51 2026 +0000
+
+    Saved progress at the end of the loop
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: 2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: e5613ff1-b0c8-4178-a066-2725059be3ed
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/6e02a673-1784-4305-9d47-08c527193e47/2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a/AwZkahs
+    Replit-Helium-Checkpoint-Created: true
+
+[33mcommit 44568d83bc33f311422896f26d0941ebb0d2668d[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Thu Feb 19 10:53:11 2026 +0000
+
+    Update AI chatbot with new API key and refined conversational style
+    
+    Integrates a new API key for the AI chatbot and adjusts the system prompt to ensure a more natural, human-like conversation, while keeping all logic in the frontend.
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: 2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: 08c5c195-d557-4a03-bf31-31de3e3baef0
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/6e02a673-1784-4305-9d47-08c527193e47/2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a/AwZkahs
+    Replit-Helium-Checkpoint-Created: true
+
+[33mcommit 4f92f2a77e173893742b3934ef267476de5401ff[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Thu Feb 19 07:57:35 2026 +0000
+
+    Prepare for full-stack AI chatbot integration and security enhancements
+    
+    Add detailed documentation outlining security requirements, AI system design, safety filters, allowed features, and UX expectations for a full-stack AI chatbot implementation.
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: 2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: 6c1e8e4e-28f4-4e89-9dde-04d393f67076
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/6e02a673-1784-4305-9d47-08c527193e47/2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a/eobO0gG
+    Replit-Helium-Checkpoint-Created: true
+
+[33mcommit 7c96c9d16d42f16b7e54868aa2c439a42335a92c[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Wed Feb 18 17:37:25 2026 +0000
+
+    Published your App
+    
+    Replit-Commit-Author: Deployment
+    Replit-Commit-Session-Id: 2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: 08708ad8-216a-489e-b533-4efd3e57ccc8
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/6e02a673-1784-4305-9d47-08c527193e47/2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a/eobO0gG
+    Replit-Commit-Deployment-Build-Id: cc4e32f8-f294-49f6-bdf4-63a4025a850a
+    Replit-Helium-Checkpoint-Created: true
+
+Notes:
+    Published your App
+
+[33mcommit 7a4af8736f267dec42b90028efc4c74e9d7c1945[m
+Author: Shannu026 <54903812-Shannu026@users.noreply.replit.com>
+Date:   Wed Feb 18 05:19:34 2026 +0000
+
+    Improve chatbot conversation and refine portfolio color schemes
+    
+    Refine AI chatbot behavior for more natural dialogue, implement a monochrome dark theme, and introduce a new light theme with subtle blue highlights. Also, add "Certifications" to the navigation bar.
+    
+    Replit-Commit-Author: Agent
+    Replit-Commit-Session-Id: 2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a
+    Replit-Commit-Checkpoint-Type: full_checkpoint
+    Replit-Commit-Event-Id: dd542382-c77b-4e2b-b493-50f885b81a38
+    Replit-Commit-Screenshot-Url: https://storage.googleapis.com/screenshot-production-us-central1/6e02a673-1784-4305-9d47-08c527193e47/2a8d1bd8-bda2-451a-b1bc-b8a9a6f17b0a
