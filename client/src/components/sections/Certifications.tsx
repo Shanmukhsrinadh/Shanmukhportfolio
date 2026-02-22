@@ -66,7 +66,7 @@ export default function Certifications() {
 
   return (
     <section id="certifications" className="py-24 bg-background">
-      <div className="container px-6">
+        <div className="w-full px-6">
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
