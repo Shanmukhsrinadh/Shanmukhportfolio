@@ -19,17 +19,19 @@ export default function Hero() {
       <div className="absolute inset-0 z-0">
         <spline-viewer
           url="https://prod.spline.design/5FhkalGo8zOKwTsh/scene.splinecode"
-          class="w-full h-full scale-110 pointer-events-auto"
+          class="w-full h-full scale-[1.1] origin-center pointer-events-auto"
           loading-anim-type="none"
         />
       </div>
 
-      {/* ================= Softer Overlay ================= */}
+      {/* ================= Soft Global Overlay ================= */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/10 to-black/40 pointer-events-none z-10" />
 
+      {/* ================= Bottom Cinematic Fade ================= */}
+      <div className="absolute bottom-0 left-0 w-full h-56 bg-gradient-to-b from-transparent to-black pointer-events-none z-20" />
+
       {/* ================= Content ================= */}
-      {/* pointer-events-none allows spline interaction behind text */}
-      <div className="relative z-20 w-full px-6 md:px-12 lg:px-24 pointer-events-none">
+      <div className="relative z-30 w-full px-6 md:px-12 lg:px-24 pointer-events-none">
         <div className="max-w-5xl">
 
           {/* Name */}
@@ -56,7 +58,7 @@ export default function Hero() {
             Digital Experiences
           </motion.h1>
 
-          {/* Description + Button */}
+          {/* Description + CTA */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -68,7 +70,7 @@ export default function Hero() {
               human-centered interfaces with modern technologies.
             </p>
 
-            {/* Button must restore pointer-events */}
+            {/* CTA Button */}
             <a
               href="#projects"
               className="group inline-flex items-center gap-4 text-white font-medium pointer-events-auto"
@@ -92,7 +94,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2, duration: 1 }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-20 pointer-events-none"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30 pointer-events-none"
       >
         <span className="text-xs uppercase tracking-widest text-white/60">
           Scroll

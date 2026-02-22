@@ -37,7 +37,7 @@ const allCertificates = [
   },
   { 
     title: "Essentials of Cloud Computing", 
-    issuer: "Infosys Springboard", 
+    issuer: "Infosys", 
     year: "2023",
     image: "https://i.ibb.co/s9p32c4C/Screenshot-2025-03-26-012554.png" 
   },
