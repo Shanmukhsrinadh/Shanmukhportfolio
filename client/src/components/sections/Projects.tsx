@@ -15,7 +15,7 @@ const projects = [
   {
     id: 1,
     category: "Design",
-    title: "Timber Oak App",
+    title: "Timber Oak",
     image:
       "https://i.ibb.co/VcsX0wHG/Untitled-1.jpg",
     link:
@@ -34,7 +34,7 @@ const projects = [
   {
     id: 3,
     category: "Development",
-    title: "Vaijanta",
+    title: "Vaijayanta",
     image: "https://i.ibb.co/JWyNZJTd/Screenshot-2026-02-23-001847.png",
     link: "https://web-asset-manager--yop2483.replit.app",
   },
