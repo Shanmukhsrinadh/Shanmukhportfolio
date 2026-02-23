@@ -24,13 +24,41 @@ export default function Chatbot() {
     }
   }, [messages]);
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+      return true;
+    }
+    return false;
+  };
+
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
+
+    // Check for abusive content (basic filter)
+    const abusiveWords = ["abuse", "offensive", "explicit"]; // Placeholder for actual list
+    if (abusiveWords.some(word => input.toLowerCase().includes(word))) {
+      setMessages(prev => [...prev, { role: "user", content: input }, { role: "assistant", content: "I'm sorry, but I cannot engage with abusive or inappropriate content. Let's keep things professional!" }]);
+      setInput("");
+      return;
+    }
 
     const userMessage: Message = { role: "user", content: input };
     setMessages(prev => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
+
+    // Scroll Logic
+    const lowerInput = input.toLowerCase();
+    if (lowerInput.includes("about") || lowerInput.includes("who is")) scrollToSection("about");
+    if (lowerInput.includes("project") || lowerInput.includes("work")) scrollToSection("projects");
+    if (lowerInput.includes("contact") || lowerInput.includes("message")) scrollToSection("contact");
+    if (lowerInput.includes("skill") || lowerInput.includes("certification")) scrollToSection("certifications");
+    if (lowerInput.includes("resume") || lowerInput.includes("cv")) scrollToSection("about");
+
+    // Check Local Storage for Sent Message
+    const hasSentMessage = localStorage.getItem("portfolio_message_sent");
 
     try {
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -46,7 +74,13 @@ export default function Chatbot() {
           messages: [
             { 
               role: "system", 
-              content: "You are Shanmukh Srinadh's personal assistant. Talk like a real human: friendly, casual, and professional. Avoid using markdown formatting like bolding with stars (**), hashtags (#), or lists unless absolutely necessary. Keep responses concise and conversational. If someone asks about Shanmukh, tell them he's a UI/UX Designer and Web Developer from Visakhapatnam who loves creating seamless digital stories. Don't act like a search engine; act like a friend representing him." 
+              content: `You are Shanmukh Srinadh's personal assistant, Snowflex. 
+              Strictly prohibit abusive, adult, or offensive content. 
+              If the user wants to send a message to Shanmukh, check if they've already sent one (status: ${hasSentMessage ? 'ALREADY_SENT' : 'NOT_SENT'}).
+              If NOT_SENT, collect: Name, Email, and Message. Once collected, inform them you are sending it.
+              If ALREADY_SENT, tell them: "You have already sent a message to Shanmukh and he will respond soon. Please do not send more messages to prevent spam."
+              If they ask about projects, explain them based on your knowledge of Shanmukh's UI/UX and Web Dev work.
+              Keep responses friendly, casual, and professional. No markdown bolding.`
             },
             ...messages,
             userMessage
@@ -57,13 +91,17 @@ export default function Chatbot() {
       const data = await response.json();
       let assistantMessage = data.choices[0].message.content;
       
-      // Post-process to remove excessive markdown just in case the model forgets
+      // Handle "Form Filling" simulation
+      if (assistantMessage.toLowerCase().includes("sending your message") && !hasSentMessage) {
+        // Here we would normally trigger the contact form's submission logic
+        // For now, we simulate the success and store in localStorage
+        localStorage.setItem("portfolio_message_sent", "true");
+      }
+
       assistantMessage = assistantMessage.replace(/\*\*/g, '').replace(/###/g, '').replace(/##/g, '').replace(/#/g, '');
-      
       setMessages(prev => [...prev, { role: "assistant", content: assistantMessage }]);
     } catch (error) {
-      console.error("Chat Error:", error);
-      setMessages(prev => [...prev, { role: "assistant", content: "Oops, something went wrong on my end. Mind trying again in a bit?" }]);
+      setMessages(prev => [...prev, { role: "assistant", content: "Oops, something went wrong. Check your connection or try again!" }]);
     } finally {
       setIsLoading(false);
     }
