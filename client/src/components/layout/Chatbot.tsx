@@ -51,11 +51,12 @@ export default function Chatbot() {
 
     // Scroll Logic
     const lowerInput = input.toLowerCase();
-    if (lowerInput.includes("about") || lowerInput.includes("who is")) scrollToSection("about");
-    if (lowerInput.includes("project") || lowerInput.includes("work")) scrollToSection("projects");
-    if (lowerInput.includes("contact") || lowerInput.includes("message")) scrollToSection("contact");
-    if (lowerInput.includes("skill") || lowerInput.includes("certification")) scrollToSection("certifications");
-    if (lowerInput.includes("resume") || lowerInput.includes("cv")) scrollToSection("about");
+    let targetSection = "";
+    if (lowerInput.includes("about") || lowerInput.includes("who is")) targetSection = "about";
+    if (lowerInput.includes("project") || lowerInput.includes("work")) targetSection = "projects";
+    if (lowerInput.includes("contact") || lowerInput.includes("message")) targetSection = "contact";
+    if (lowerInput.includes("skill") || lowerInput.includes("certification")) targetSection = "certifications";
+    if (lowerInput.includes("resume") || lowerInput.includes("cv")) targetSection = "about";
 
     // Check Local Storage for Sent Message
     const hasSentMessage = localStorage.getItem("portfolio_message_sent");
@@ -75,12 +76,26 @@ export default function Chatbot() {
             { 
               role: "system", 
               content: `You are Shanmukh Srinadh's personal assistant, Snowflex. 
-              Strictly prohibit abusive, adult, or offensive content. 
-              If the user wants to send a message to Shanmukh, check if they've already sent one (status: ${hasSentMessage ? 'ALREADY_SENT' : 'NOT_SENT'}).
-              If NOT_SENT, collect: Name, Email, and Message. Once collected, inform them you are sending it.
-              If ALREADY_SENT, tell them: "You have already sent a message to Shanmukh and he will respond soon. Please do not send more messages to prevent spam."
-              If they ask about projects, explain them based on your knowledge of Shanmukh's UI/UX and Web Dev work.
-              Keep responses friendly, casual, and professional. No markdown bolding.`
+              STRICTLY STICK TO THE PORTFOLIO CONTENT PROVIDED BELOW. Do not invent projects or details.
+              
+              PORTFOLIO DATA:
+              - Projects: 
+                * Timber Oak (Design): Figma proto for a timber related project.
+                * M-Wallet (Design): Digital wallet app mockup.
+                * Vaijayanta (Dev): Web Asset Manager.
+                * Fashique (Dev): E-commerce store.
+                * Legacyonwheels (Dev): Car clone project.
+                * Earthquake Detection (Dev): ML/Data project.
+                * Maply Travel & Gadgets WooCommerce (WordPress).
+              - Certifications: UI/UX Design (Google), Frontend Dev (Meta), AWS Cloud Practitioner.
+              - About: UI/UX Designer & Web Dev from Visakhapatnam. Focuses on seamless digital stories.
+              
+              INSTRUCTIONS:
+              - If asked about projects, explain them in your own words based on this list.
+              - Strictly prohibit abusive, adult, or offensive content. 
+              - Message sending status: ${hasSentMessage ? 'ALREADY_SENT' : 'NOT_SENT'}.
+              - If ALREADY_SENT, tell them: "You have already sent a message to Shanmukh and he will respond soon. Please do not send more messages to prevent spam."
+              - Keep responses friendly, casual, and professional. No markdown bolding.`
             },
             ...messages,
             userMessage
@@ -91,6 +106,11 @@ export default function Chatbot() {
       const data = await response.json();
       let assistantMessage = data.choices[0].message.content;
       
+      // Perform scroll SIMULTANEOUSLY with message display
+      if (targetSection) {
+        scrollToSection(targetSection);
+      }
+
       // Handle "Form Filling" simulation
       if (assistantMessage.toLowerCase().includes("sending your message") && !hasSentMessage) {
         // Here we would normally trigger the contact form's submission logic
