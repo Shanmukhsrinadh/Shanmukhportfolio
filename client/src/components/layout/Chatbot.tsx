@@ -152,7 +152,7 @@ export default function Chatbot() {
                   <Bot className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-bold">SnowFlex AI</p>
+                  <p className="text-sm font-bold">SnowFlex</p>
                   <p className="text-[10px] text-muted-foreground flex items-center gap-1">
                     <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" /> Active
                   </p>
