@@ -60,6 +60,15 @@ export default function Contact() {
      Submit Handler
   ================================= */
 
+  // Expose submit function for chatbot
+  useEffect(() => {
+    (window as any).submitContactForm = async (data: any) => {
+      form.reset(data);
+      return await onSubmit(data);
+    };
+    return () => { delete (window as any).submitContactForm; };
+  }, [form]);
+
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
 

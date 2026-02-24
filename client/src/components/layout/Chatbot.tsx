@@ -59,7 +59,19 @@ export default function Chatbot() {
     if (lowerInput.includes("resume") || lowerInput.includes("cv")) targetSection = "about";
 
     // Check Local Storage for Sent Message
-    const hasSentMessage = localStorage.getItem("portfolio_message_sent");
+    const lastSentStr = localStorage.getItem("portfolio_message_last_sent");
+    const now = Date.now();
+    const fortyEightHours = 48 * 60 * 60 * 1000;
+
+    if (lastSentStr) {
+      const lastSent = parseInt(lastSentStr);
+      if (now - lastSent < fortyEightHours) {
+        setMessages(prev => [...prev, { role: "user", content: input }, { role: "assistant", content: "Your message has been sent already in less than 48hrs. Shanmukh will respond soon and please do not spam." }]);
+        setInput("");
+        setIsLoading(false);
+        return;
+      }
+    }
 
     try {
       const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
@@ -87,14 +99,14 @@ export default function Chatbot() {
                 * Legacyonwheels (Dev): Car clone project.
                 * Earthquake Detection (Dev): ML/Data project.
                 * Maply Travel & Gadgets WooCommerce (WordPress).
-              - Certifications: UI/UX Design (Google), Frontend Dev (Meta), AWS Cloud Practitioner.
+              - Certifications: UI/UX Design (Tech Mahindra), Graphic Design (InAmigos), Instruction Designer (Dr Reddy's), Azure AI (Microsoft).
               - About: UI/UX Designer & Web Dev from Visakhapatnam. Focuses on seamless digital stories.
               
-              INSTRUCTIONS:
-              - If asked about projects, explain them in your own words based on this list.
-              - Strictly prohibit abusive, adult, or offensive content. 
-              - Message sending status: ${hasSentMessage ? 'ALREADY_SENT' : 'NOT_SENT'}.
-              - If ALREADY_SENT, tell them: "You have already sent a message to Shanmukh and he will respond soon. Please do not send more messages to prevent spam."
+              ASSISTANT CAPABILITIES:
+              - You can send messages on behalf of the user.
+              - If the user wants to send a message, you MUST collect: Name, Email, Phone Number, and Message.
+              - Once you have ALL FOUR, respond with: "CONFIRMED_SEND: {name: '...', email: '...', phone: '...', message: '...'}"
+              - STRICTLY prohibit abusive, adult, or offensive content.
               - Keep responses friendly, casual, and professional. No markdown bolding.`
             },
             ...messages,
@@ -111,11 +123,23 @@ export default function Chatbot() {
         scrollToSection(targetSection);
       }
 
-      // Handle "Form Filling" simulation
-      if (assistantMessage.toLowerCase().includes("sending your message") && !hasSentMessage) {
-        // Here we would normally trigger the contact form's submission logic
-        // For now, we simulate the success and store in localStorage
-        localStorage.setItem("portfolio_message_sent", "true");
+      // Handle Automated Form Submission
+      if (assistantMessage.includes("CONFIRMED_SEND:")) {
+        try {
+          const jsonStr = assistantMessage.split("CONFIRMED_SEND:")[1].trim();
+          const formData = JSON.parse(jsonStr.replace(/'/g, '"'));
+          
+          if ((window as any).submitContactForm) {
+            const result = await (window as any).submitContactForm(formData);
+            localStorage.setItem("portfolio_message_last_sent", Date.now().toString());
+            assistantMessage = "I've sent your message successfully! Shanmukh will get back to you soon.";
+          } else {
+            assistantMessage = "I'm sorry, I'm having trouble connecting to the contact form right now. Please try filling it out manually below.";
+          }
+        } catch (e) {
+          console.error("Parse Error:", e);
+          assistantMessage = "I couldn't process the message details correctly. Could you please double check them?";
+        }
       }
 
       assistantMessage = assistantMessage.replace(/\*\*/g, '').replace(/###/g, '').replace(/##/g, '').replace(/#/g, '');
