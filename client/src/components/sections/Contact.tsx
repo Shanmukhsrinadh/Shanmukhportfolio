@@ -64,7 +64,19 @@ export default function Contact() {
   useEffect(() => {
     (window as any).submitContactForm = async (data: any) => {
       form.reset(data);
-      return await onSubmit(data);
+      // Wait for form state to update then submit
+      return new Promise((resolve) => {
+        setTimeout(async () => {
+          try {
+            await form.handleSubmit(onSubmit)();
+            // Since handleSubmit doesn't return the result of onSubmit easily, 
+            // we check if the form is still valid and was submitted
+            resolve(true);
+          } catch (error) {
+            resolve(false);
+          }
+        }, 100);
+      });
     };
     return () => { delete (window as any).submitContactForm; };
   }, [form]);

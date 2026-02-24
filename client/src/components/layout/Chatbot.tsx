@@ -130,9 +130,15 @@ export default function Chatbot() {
           const formData = JSON.parse(jsonStr.replace(/'/g, '"'));
           
           if ((window as any).submitContactForm) {
-            const result = await (window as any).submitContactForm(formData);
-            localStorage.setItem("portfolio_message_last_sent", Date.now().toString());
-            assistantMessage = "I've sent your message successfully! Shanmukh will get back to you soon.";
+            setIsLoading(true); // Ensure loading state while sending
+            const success = await (window as any).submitContactForm(formData);
+            
+            if (success) {
+              localStorage.setItem("portfolio_message_last_sent", Date.now().toString());
+              assistantMessage = "I've sent your message successfully! Shanmukh will get back to you soon.";
+            } else {
+              assistantMessage = "The message couldn't be sent. Please double check your email and phone number details, or try the form manually.";
+            }
           } else {
             assistantMessage = "I'm sorry, I'm having trouble connecting to the contact form right now. Please try filling it out manually below.";
           }
