@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -11,13 +13,11 @@ import {
 import { Button } from "@/components/ui/button";
 
 const projects = [
-  // ================= DESIGN =================
   {
     id: 1,
     category: "Design",
     title: "Timber Oak",
-    image:
-      "https://i.ibb.co/VcsX0wHG/Untitled-1.jpg",
+    image: "https://i.ibb.co/VcsX0wHG/Untitled-1.jpg",
     link:
       "https://www.figma.com/proto/ac8saGZ1ybu6zHQljHKavE/Untitled?node-id=15-1430",
   },
@@ -25,17 +25,17 @@ const projects = [
     id: 2,
     category: "Design",
     title: "M-Wallet",
-    image: "https://shanmukhsrinadh.github.io/Shannuportfolio/img/M-wallet%20mockup%20screen%20figma.png", 
+    image:
+      "https://shanmukhsrinadh.github.io/Shannuportfolio/img/M-wallet%20mockup%20screen%20figma.png",
     link:
-      "https://www.figma.com/proto/H5oV9PNMpZlcCDqE7dnHLh/Shanmukh-srinadh-9550563283-?node-id=9-617&t=AcbSgdqaE1GSObDz-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=9%3A617",
+      "https://www.figma.com/proto/H5oV9PNMpZlcCDqE7dnHLh/Shanmukh-srinadh-9550563283-?node-id=9-617",
   },
-
-  // ================= DEVELOPMENT =================
   {
     id: 3,
     category: "Development",
     title: "Vaijayanta",
-    image: "https://i.ibb.co/JWyNZJTd/Screenshot-2026-02-23-001847.png",
+    image:
+      "https://i.ibb.co/JWyNZJTd/Screenshot-2026-02-23-001847.png",
     link: "https://web-asset-manager--yop2483.replit.app",
   },
   {
@@ -63,8 +63,6 @@ const projects = [
       "https://i.ibb.co/bHjYmG1/Screenshot-2024-11-07-234521.png",
     link: "https://earthquakemodel-2.onrender.com/",
   },
-
-  // ================= WORDPRESS =================
   {
     id: 7,
     category: "WordPress",
@@ -87,11 +85,18 @@ const categories = ["Design", "Development", "WordPress"];
 
 export default function Projects() {
   const [activeCategory, setActiveCategory] = useState("Design");
-  const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const [hoveredId, setHoveredId] = useState<number | null>(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
   const [showAll, setShowAll] = useState(false);
+  const [canHover, setCanHover] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(hover: hover)");
+    setCanHover(mediaQuery.matches);
+  }, []);
 
   const filteredProjects = projects.filter(
-    (project) => project.category === activeCategory
+    (p) => p.category === activeCategory
   );
 
   const visibleProjects =
@@ -101,6 +106,7 @@ export default function Projects() {
 
   useEffect(() => {
     setShowAll(false);
+    setExpandedId(null);
   }, [activeCategory]);
 
   const getCategoryIcon = (category: string) => {
@@ -116,15 +122,21 @@ export default function Projects() {
     }
   };
 
+  const handleClick = (project: any) => {
+    if (canHover) {
+      window.open(project.link, "_blank");
+    } else {
+      setExpandedId(expandedId === project.id ? null : project.id);
+    }
+  };
+
   return (
-    <section
-      id="projects"
-      className="py-32 bg-background min-h-screen relative"
-    >
+    <section className="py-32 bg-background min-h-screen relative">
       <div className="w-full px-6">
-        {/* Header */}
+
+        {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-20 gap-8">
-          <h2 className="text-5xl md:text-7xl font-display font-bold">
+          <h2 className="text-5xl md:text-7xl font-bold">
             My <br /> <span className="text-white/30">Work</span>
           </h2>
 
@@ -145,46 +157,45 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Project List */}
+        {/* PROJECT LIST */}
         <div className="flex flex-col">
-          <AnimatePresence mode="wait">
+          <AnimatePresence>
             {visibleProjects.map((project) => (
               <motion.div
                 key={project.id}
+                layout
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                onMouseEnter={() => setHoveredProject(project.id)}
-                onMouseLeave={() => setHoveredProject(null)}
-                onClick={() => window.open(project.link, "_blank")}
-                className="group relative border-t border-white/10 py-12 cursor-pointer flex justify-between items-center"
+                onMouseEnter={() => canHover && setHoveredId(project.id)}
+                onMouseLeave={() => canHover && setHoveredId(null)}
+                onClick={() => handleClick(project)}
+                className="relative border-t border-white/10 py-12 cursor-pointer"
               >
-                {/* Left Content */}
-                <div className="relative z-10 transition-transform duration-300 group-hover:translate-x-4">
-                  <span className="text-xs text-primary mb-2 block">
-                    {project.category}
-                  </span>
-                  <h3 className="text-3xl md:text-5xl font-display font-medium text-muted-foreground group-hover:text-foreground transition-colors">
-                    {project.title}
-                  </h3>
-                </div>
+                <div className="flex justify-between items-center">
+                  <div>
+                    <span className="text-xs text-primary block mb-2">
+                      {project.category}
+                    </span>
+                    <h3 className="text-3xl md:text-5xl text-muted-foreground hover:text-foreground transition-colors">
+                      {project.title}
+                    </h3>
+                  </div>
 
-                {/* Right Icon */}
-                <div className="relative z-10">
-                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white text-black group-hover:bg-primary group-hover:text-background transition-all">
+                  {/* CATEGORY ICON RESTORED */}
+                  <div className="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center bg-white text-black hover:bg-primary hover:text-background transition-all">
                     {getCategoryIcon(project.category)}
                   </div>
                 </div>
 
-                {/* Hover Image Preview */}
-                {hoveredProject === project.id && (
+                {/* DESKTOP HOVER PREVIEW */}
+                {canHover && hoveredId === project.id && (
                   <motion.div
-                    layoutId="preview"
                     className="absolute right-20 top-1/2 -translate-y-1/2 w-[400px] h-[250px] rounded-lg overflow-hidden pointer-events-none hidden lg:block"
-                    initial={{ opacity: 0, scale: 0.85 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.85 }}
+                    exit={{ opacity: 0, scale: 0.9 }}
                   >
                     <img
                       src={project.image}
@@ -194,26 +205,52 @@ export default function Projects() {
                     <div className="absolute inset-0 bg-black/20" />
                   </motion.div>
                 )}
+
+                {/* TOUCH INLINE EXPANSION */}
+                {!canHover && expandedId === project.id && (
+                  <motion.div
+                    layout
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    className="mt-6 overflow-hidden rounded-lg"
+                  >
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="w-full rounded-lg object-cover"
+                    />
+
+                    <div className="mt-4">
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          window.open(project.link, "_blank");
+                        }}
+                        className="w-full"
+                      >
+                        Visit Project
+                      </Button>
+                    </div>
+                  </motion.div>
+                )}
               </motion.div>
             ))}
           </AnimatePresence>
-
-          <div className="border-t border-white/10" />
         </div>
 
-        {/* View Toggle */}
+        {/* VIEW TOGGLE */}
         {filteredProjects.length > 2 && (
           <div className="mt-10 flex justify-center">
             <Button
               variant="ghost"
               onClick={() => setShowAll(!showAll)}
-              className="group"
             >
               {showAll ? "View Less" : "View All Projects"}
               {showAll ? (
-                <ChevronUp className="ml-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+                <ChevronUp className="ml-2 w-4 h-4" />
               ) : (
-                <ChevronDown className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
+                <ChevronDown className="ml-2 w-4 h-4" />
               )}
             </Button>
           </div>
