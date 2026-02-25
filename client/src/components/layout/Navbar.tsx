@@ -37,7 +37,7 @@ export default function Navbar() {
   ];
 
   const handleResumeDownload = () => {
-    window.open("https://drive.google.com/file/d/1QT1MQjPJK7pzxHusaM2NYgJe8AuMjo12/view", "_blank");
+    window.open("https://drive.google.com/file/d/1hWqV2b6pEA8zP9fTXWGztBZZFZctzWHJ/view?usp=sharing", "_blank");
   };
 
   return (
