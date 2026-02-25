@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Award, X } from "lucide-react";
-import { Dialog, DialogContent, DialogClose } from "@/components/ui/dialog";
+import { Award, ChevronDown, ChevronUp } from "lucide-react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 
 const allCertificates = [
@@ -37,7 +37,7 @@ const allCertificates = [
   },
   { 
     title: "Essentials of Cloud Computing", 
-    issuer: "Infosys Springboard", 
+    issuer: "Infosys", 
     year: "2023",
     image: "https://i.ibb.co/s9p32c4C/Screenshot-2025-03-26-012554.png" 
   },
@@ -63,66 +63,102 @@ const allCertificates = [
 
 export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState<typeof allCertificates[0] | null>(null);
+  const [showAll, setShowAll] = useState(false);
+
+  const visibleCertificates = showAll
+    ? allCertificates
+    : allCertificates.slice(0, 2);
 
   return (
     <section id="certifications" className="py-24 bg-background">
-      <div className="container px-6">
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="mb-12"
+      <div className="w-full px-6">
+
+        {/* Section Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mb-12"
         >
-            <h2 className="text-3xl font-display font-bold uppercase tracking-widest mb-2 text-muted-foreground">Recognition</h2>
-            <div className="h-1 w-20 bg-primary" />
+          <h2 className="text-3xl font-display font-bold uppercase tracking-widest mb-2 text-muted-foreground">
+            Recognition
+          </h2>
+          <div className="h-1 w-20 bg-primary" />
         </motion.div>
 
+        {/* Certificates Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {allCertificates.map((cert, index) => (
-                <motion.div
-                    key={cert.title + index}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    whileHover={{ scale: 1.02 }}
-                    onClick={() => setSelectedCert(cert)}
-                    className="group relative overflow-hidden rounded-lg border border-white/5 bg-white/5 p-6 hover:bg-white/10 transition-all cursor-pointer"
-                >
-                    <div className="flex justify-between items-start">
-                        <div>
-                            <h3 className="font-display font-bold text-xl mb-1 group-hover:text-primary transition-colors">{cert.title}</h3>
-                            <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                        </div>
-                        <span className="text-xs font-mono border border-white/10 px-2 py-1 rounded text-muted-foreground group-hover:border-primary/50 group-hover:text-primary transition-colors">
-                            {cert.year}
-                        </span>
-                    </div>
-                    <Award className="absolute -bottom-4 -right-4 w-24 h-24 text-white/5 group-hover:text-white/10 transition-colors rotate-12" />
-                </motion.div>
+          <AnimatePresence>
+            {visibleCertificates.map((cert, index) => (
+              <motion.div
+                key={cert.title}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3, delay: index * 0.05 }}
+                whileHover={{ scale: 1.02 }}
+                onClick={() => setSelectedCert(cert)}
+                className="group relative overflow-hidden rounded-lg border border-white/5 bg-white/5 p-6 hover:bg-white/10 transition-all cursor-pointer"
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="font-display font-bold text-xl mb-1 group-hover:text-primary transition-colors">
+                      {cert.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {cert.issuer}
+                    </p>
+                  </div>
+                  <span className="text-xs font-mono border border-white/10 px-2 py-1 rounded text-muted-foreground group-hover:border-primary/50 group-hover:text-primary transition-colors">
+                    {cert.year}
+                  </span>
+                </div>
+
+                <Award className="absolute -bottom-4 -right-4 w-24 h-24 text-white/5 group-hover:text-white/10 transition-colors rotate-12" />
+              </motion.div>
             ))}
+          </AnimatePresence>
         </div>
 
+        {/* Toggle Button */}
+        {allCertificates.length > 2 && (
+          <div className="mt-8 flex justify-center">
+            <Button
+              variant="ghost"
+              onClick={() => setShowAll(!showAll)}
+              className="group"
+            >
+              {showAll ? "View Less" : "View All Certifications"}
+              {showAll ? (
+                <ChevronUp className="ml-2 w-4 h-4 group-hover:-translate-y-1 transition-transform" />
+              ) : (
+                <ChevronDown className="ml-2 w-4 h-4 group-hover:translate-y-1 transition-transform" />
+              )}
+            </Button>
+          </div>
+        )}
+
+        {/* Dialog Preview */}
         <Dialog open={!!selectedCert} onOpenChange={() => setSelectedCert(null)}>
-            <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-white/10">
-                <div className="relative aspect-[4/3] w-full">
-                    <img 
-                        src={selectedCert?.image} 
-                        alt={selectedCert?.title} 
-                        className="w-full h-full object-contain"
-                    />
-                    <div className="absolute top-4 right-4 z-50">
-                        <DialogClose asChild>
-                            <Button variant="ghost" size="icon" className="rounded-full bg-black/50 hover:bg-black/80 text-white">
-                                <X className="w-6 h-6" />
-                            </Button>
-                        </DialogClose>
-                    </div>
-                </div>
-                <div className="p-6 bg-black/90 border-t border-white/10">
-                    <h3 className="text-2xl font-display font-bold text-white mb-2">{selectedCert?.title}</h3>
-                    <p className="text-muted-foreground">{selectedCert?.issuer} • {selectedCert?.year}</p>
-                </div>
-            </DialogContent>
+          <DialogContent className="max-w-4xl p-0 overflow-hidden bg-black border-white/10">
+            <div className="aspect-[4/3] w-full">
+              <img
+                src={selectedCert?.image}
+                alt={selectedCert?.title}
+                className="w-full h-full object-contain"
+              />
+            </div>
+
+            <div className="p-6 bg-black/90 border-t border-white/10">
+              <h3 className="text-2xl font-display font-bold text-white mb-2">
+                {selectedCert?.title}
+              </h3>
+              <p className="text-muted-foreground">
+                {selectedCert?.issuer} • {selectedCert?.year}
+              </p>
+            </div>
+          </DialogContent>
         </Dialog>
+
       </div>
     </section>
   );

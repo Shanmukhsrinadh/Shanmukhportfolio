@@ -13,8 +13,8 @@ export default function Home() {
     <div className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-black">
       <CursorFollower />
       <Navbar />
-      <Chatbot />
-      
+      {/* <Chatbot />
+       */}
       <main>
         <Hero />
         <About />
