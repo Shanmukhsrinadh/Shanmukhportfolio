@@ -131,7 +131,7 @@ export default function Projects() {
   };
 
   return (
-    <section className="py-32 bg-background min-h-screen relative">
+    <section id="projects" className="py-32 bg-background min-h-screen relative">
       <div className="w-full px-6">
 
         {/* HEADER */}
