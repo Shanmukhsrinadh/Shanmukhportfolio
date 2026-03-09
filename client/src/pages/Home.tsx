@@ -7,6 +7,7 @@ import Certifications from "@/components/sections/Certifications";
 import Services from "@/components/sections/Services";
 import Projects from "@/components/sections/Projects";
 import Contact from "@/components/sections/Contact";
+import Footer from "@/components/sections/Footer";
 
 export default function Home() {
   return (
@@ -24,12 +25,7 @@ export default function Home() {
         <Contact />
       </main>
 
-      <footer className="py-12 text-center text-sm text-muted-foreground border-t border-white/5">
-        <p className="mb-3 text-xs tracking-wide">
-          Shanmukh Srinadh • Brewed in Visakhapatnam, India • Currently designing the future with code & creativity
-        </p>
-        <p className="text-xs">© 2026 Shanmukh Srinadh. Crafted with Design Excellence.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
