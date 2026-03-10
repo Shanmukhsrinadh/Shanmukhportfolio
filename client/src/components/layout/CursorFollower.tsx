@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useSpring, useMotionValue } from "framer-motion";
 
 export default function CursorFollower() {
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   
@@ -10,6 +11,24 @@ export default function CursorFollower() {
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
+    // Check if device supports hover (has mouse/pointer)
+    const mediaQuery = window.matchMedia("(hover: hover)");
+    const isHoverSupported = mediaQuery.matches;
+    
+    // Also check for touch events
+    const hasTouchSupport = () => {
+      return (
+        window.matchMedia("(hover: none)").matches ||
+        window.matchMedia("(pointer: coarse)").matches ||
+        navigator.maxTouchPoints > 0
+      );
+    };
+
+    if (!isHoverSupported || hasTouchSupport()) {
+      setIsTouchDevice(true);
+      return;
+    }
+
     const moveCursor = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
@@ -20,6 +39,11 @@ export default function CursorFollower() {
       window.removeEventListener("mousemove", moveCursor);
     };
   }, []);
+
+  // Don't render cursor ball on touch devices
+  if (isTouchDevice) {
+    return null;
+  }
 
   return (
     <motion.div
