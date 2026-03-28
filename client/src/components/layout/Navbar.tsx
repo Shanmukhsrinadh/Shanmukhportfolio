@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Moon, Sun, Download } from "lucide-react";
+import { Menu, X, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -13,20 +12,8 @@ export default function Navbar() {
       setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
-    
-    if (document.documentElement.classList.contains("light")) {
-        setTheme("light");
-    }
-    
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const toggleTheme = () => {
-    const newTheme = theme === "dark" ? "light" : "dark";
-    setTheme(newTheme);
-    document.documentElement.classList.toggle("dark");
-    document.documentElement.classList.toggle("light");
-  };
 
   const navLinks = [
     { name: "About", href: "#about" },
@@ -72,26 +59,10 @@ export default function Navbar() {
             <Download className="mr-2 h-4 w-4 group-hover:animate-bounce" />
             Resume
           </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={toggleTheme}
-            className="rounded-full hover:bg-primary/10"
-          >
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
         </div>
 
         {/* Mobile Toggle */}
         <div className="md:hidden flex items-center space-x-4">
-            <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleTheme}
-                className="rounded-full"
-            >
-                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
             <button onClick={() => setIsOpen(!isOpen)} className="text-foreground p-2">
                 {isOpen ? <X /> : <Menu />}
             </button>

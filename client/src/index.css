@@ -70,37 +70,6 @@
   --radius: 0.5rem;
 }
 
-.light {
-  /* Soft High-End Light Mode */
-  --background: 0 0% 100%;
-  --foreground: 220 20% 15%;
-
-  --card: 0 0% 98%;
-  --card-foreground: 220 20% 15%;
-
-  --popover: 0 0% 100%;
-  --popover-foreground: 220 20% 15%;
-
-  /* Subtle Blue Highlights for Light Mode */
-  --primary: 215 90% 45%; 
-  --primary-foreground: 0 0% 100%;
-
-  --secondary: 215 30% 96%;
-  --secondary-foreground: 215 90% 30%;
-
-  --muted: 215 15% 92%;
-  --muted-foreground: 215 10% 45%;
-
-  --accent: 215 50% 94%;
-  --accent-foreground: 215 90% 40%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 215 15% 90%;
-  --input: 215 15% 90%;
-  --ring: 215 90% 45%;
-}
 
 @layer base {
   * {
