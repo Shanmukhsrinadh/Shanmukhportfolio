@@ -72,7 +72,7 @@ export default function About() {
   };
 
   return (
-    <section className="relative py-32 bg-black overflow-hidden">
+    <section id="about" className="relative py-32 bg-black overflow-hidden">
       <div className="w-full px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -108,18 +108,18 @@ export default function About() {
               if (canHover) setIsActive(false);
             }}
             onPointerDown={(e) => {
+              if (!canHover) return;
               setIsActive(true);
               updatePosition(e.clientX, e.clientY);
-
-              // 🔥 Capture pointer (THIS is the fix)
               e.currentTarget.setPointerCapture(e.pointerId);
             }}
             onPointerMove={(e) => {
-              if (isActive) {
+              if (canHover && isActive) {
                 updatePosition(e.clientX, e.clientY);
               }
             }}
             onPointerUp={(e) => {
+              if (!canHover) return;
               setIsActive(false);
               e.currentTarget.releasePointerCapture(e.pointerId);
             }}

@@ -27,6 +27,24 @@ export default function Navbar() {
     window.open("https://drive.google.com/file/d/1hWqV2b6pEA8zP9fTXWGztBZZFZctzWHJ/view?usp=sharing", "_blank");
   };
 
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    const id = href.replace("#", "");
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToSectionMobile = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    setIsOpen(false);
+    const id = href.replace("#", "");
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 350);
+  };
+
   return (
     <nav
       className={`fixed top-0 w-full z-40 transition-all duration-300 ${
@@ -44,6 +62,7 @@ export default function Navbar() {
             <a
               key={link.name}
               href={link.href}
+              onClick={(e) => scrollToSection(e, link.href)}
               className="text-sm font-medium hover:text-primary transition-colors relative group"
             >
               {link.name}
@@ -76,7 +95,7 @@ export default function Navbar() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-background border-b"
+            className="md:hidden bg-background border-b overflow-hidden"
           >
             <div className="container mx-auto px-6 py-8 flex flex-col space-y-4">
               {navLinks.map((link) => (
@@ -84,7 +103,7 @@ export default function Navbar() {
                   key={link.name}
                   href={link.href}
                   className="text-lg font-medium hover:text-primary"
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => scrollToSectionMobile(e, link.href)}
                 >
                   {link.name}
                 </a>
