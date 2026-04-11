@@ -133,7 +133,7 @@ export default function Chatbot() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer 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",
+            Authorization: "Bearer ------------------------",
             "HTTP-Referer": window.location.origin,
             "X-Title": "Shanmukh Portfolio Assistant",
           },
