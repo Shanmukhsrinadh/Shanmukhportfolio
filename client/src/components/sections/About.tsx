@@ -96,7 +96,7 @@ export default function About() {
             ref={gridRef}
             className={`relative ${canHover ? "cursor-none" : ""}`}
             style={{
-              touchAction: canHover ? "auto" : "none",
+              touchAction: "auto",
             }}
             onPointerEnter={(e) => {
               if (canHover) {

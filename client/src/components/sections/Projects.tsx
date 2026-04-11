@@ -200,6 +200,7 @@ export default function Projects() {
                     <img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/20" />
@@ -209,7 +210,6 @@ export default function Projects() {
                 {/* TOUCH INLINE EXPANSION */}
                 {!canHover && expandedId === project.id && (
                   <motion.div
-                    layout
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
@@ -218,6 +218,7 @@ export default function Projects() {
                     <img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
                       className="w-full rounded-lg object-cover"
                     />
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ArrowDownRight } from "lucide-react";
 
@@ -12,16 +13,36 @@ declare global {
 }
 
 export default function Hero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () =>
+      setIsMobile(
+        window.matchMedia("(pointer: coarse)").matches ||
+          window.innerWidth < 768
+      );
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
 
-      {/* ================= Spline Background ================= */}
+      {/* ================= Background ================= */}
       <div className="absolute inset-0 z-0">
-        <spline-viewer
-          url="https://prod.spline.design/5FhkalGo8zOKwTsh/scene.splinecode"
-          class="w-full h-full scale-[1.1] origin-center pointer-events-auto"
-          loading-anim-type="none"
-        />
+        {isMobile ? (
+          /* Static gradient background for mobile — no WebGL */
+          <div className="w-full h-full bg-gradient-to-br from-black via-zinc-900 to-black">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(255,255,255,0.07),transparent)]" />
+          </div>
+        ) : (
+          <spline-viewer
+            url="https://prod.spline.design/5FhkalGo8zOKwTsh/scene.splinecode"
+            class="w-full h-full scale-[1.1] origin-center pointer-events-auto"
+            loading-anim-type="none"
+          />
+        )}
       </div>
 
       {/* ================= Soft Global Overlay ================= */}

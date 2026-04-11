@@ -77,6 +77,7 @@ export default function Certifications() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="mb-12"
         >
           <h2 className="text-3xl font-display font-bold uppercase tracking-widest mb-2 text-muted-foreground">
@@ -144,6 +145,7 @@ export default function Certifications() {
               <img
                 src={selectedCert?.image}
                 alt={selectedCert?.title}
+                loading="lazy"
                 className="w-full h-full object-contain"
               />
             </div>

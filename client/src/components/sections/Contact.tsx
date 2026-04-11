@@ -201,6 +201,7 @@ export default function Contact() {
             <motion.h2
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className="text-5xl md:text-7xl font-display font-bold mb-8"
             >
@@ -244,6 +245,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="bg-secondary/10 p-8 rounded-2xl border border-white/5"
           >

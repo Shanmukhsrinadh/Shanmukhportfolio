@@ -27,6 +27,7 @@ export default function Services() {
              <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 className="text-4xl md:text-6xl font-display font-bold mb-6"
             >
                 What I Do
@@ -34,6 +35,7 @@ export default function Services() {
             <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
                 className="max-w-2xl mx-auto text-muted-foreground"
             >
@@ -47,8 +49,8 @@ export default function Services() {
                     key={service.title}
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.2, duration: 0.6 }}
-                    whileHover={{ y: -10 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.15, duration: 0.5 }}
                     className="group relative p-8 rounded-2xl bg-background border border-white/5 hover:border-primary/50 transition-colors duration-300"
                 >
                     <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-2xl pointer-events-none" />
