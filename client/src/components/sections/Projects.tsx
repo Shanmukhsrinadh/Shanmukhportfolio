@@ -48,31 +48,6 @@ const projects = [
   },
   {
     id: 5,
-    category: "Development",
-    title: "Fashique",
-    image:
-      "https://i.ibb.co/Nh6fKrf/Whats-App-Image-2025-03-13-at-14-03-46.jpg",
-    link: "https://shanmukhsrinadh.github.io/Fashiquecomstore01/",
-  },
-  {
-    id: 6,
-    category: "Development",
-    title: "Legacyonwheels",
-    image:
-      "https://i.ibb.co/RTWsFrvg/Screenshot-2025-02-12-014242.png",
-    link:
-      "https://shanmukhsrinadh.github.io/Legacyonwheelsclone-main/",
-  },
-  {
-    id: 7,
-    category: "Development",
-    title: "Earthquake Detection",
-    image:
-      "https://i.ibb.co/bHjYmG1/Screenshot-2024-11-07-234521.png",
-    link: "https://earthquakemodel-2.onrender.com/",
-  },
-  {
-    id: 8,
     category: "WordPress",
     title: "Maply Travel",
     image:
@@ -80,7 +55,7 @@ const projects = [
     link: "https://dev-sweb1.pantheonsite.io/",
   },
   {
-    id: 9,
+    id: 6,
     category: "WordPress",
     title: "Gadgets WooCommerce",
     image:
