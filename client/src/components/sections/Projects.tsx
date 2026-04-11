@@ -32,7 +32,7 @@ const projects = [
   },
       {
     id: 3,
-    category: "Deployment",
+    category: "Development",
     title: "CGRS Elite Events",
     image:
       "https://i.ibb.co/8nHynYTq/Screenshot-2026-04-12-023321.png",
