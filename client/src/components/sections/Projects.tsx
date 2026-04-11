@@ -79,6 +79,14 @@ const projects = [
       "https://i.ibb.co/TMBYjY2q/Woo-com.png",
     link: "https://dev-wp02woocom.pantheonsite.io/",
   },
+    {
+    id: 9,
+    category: "Deployment",
+    title: "CGRS Elite Events",
+    image:
+      "https://i.ibb.co/8nHynYTq/Screenshot-2026-04-12-023321.png",
+    link: "https://www.cgrselite.com/",
+  },
 ];
 
 const categories = ["Design", "Development", "WordPress"];
