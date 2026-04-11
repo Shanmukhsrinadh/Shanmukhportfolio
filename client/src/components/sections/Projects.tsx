@@ -30,8 +30,16 @@ const projects = [
     link:
       "https://www.figma.com/proto/H5oV9PNMpZlcCDqE7dnHLh/Shanmukh-srinadh-9550563283-?node-id=9-617",
   },
-  {
+      {
     id: 3,
+    category: "Deployment",
+    title: "CGRS Elite Events",
+    image:
+      "https://i.ibb.co/8nHynYTq/Screenshot-2026-04-12-023321.png",
+    link: "https://www.cgrselite.com/",
+  },
+  {
+    id: 4,
     category: "Development",
     title: "Vaijayanta",
     image:
@@ -39,7 +47,7 @@ const projects = [
     link: "https://web-asset-manager--yop2483.replit.app",
   },
   {
-    id: 4,
+    id: 5,
     category: "Development",
     title: "Fashique",
     image:
@@ -47,7 +55,7 @@ const projects = [
     link: "https://shanmukhsrinadh.github.io/Fashiquecomstore01/",
   },
   {
-    id: 5,
+    id: 6,
     category: "Development",
     title: "Legacyonwheels",
     image:
@@ -56,7 +64,7 @@ const projects = [
       "https://shanmukhsrinadh.github.io/Legacyonwheelsclone-main/",
   },
   {
-    id: 6,
+    id: 7,
     category: "Development",
     title: "Earthquake Detection",
     image:
@@ -64,7 +72,7 @@ const projects = [
     link: "https://earthquakemodel-2.onrender.com/",
   },
   {
-    id: 7,
+    id: 8,
     category: "WordPress",
     title: "Maply Travel",
     image:
@@ -72,20 +80,12 @@ const projects = [
     link: "https://dev-sweb1.pantheonsite.io/",
   },
   {
-    id: 8,
+    id: 9,
     category: "WordPress",
     title: "Gadgets WooCommerce",
     image:
       "https://i.ibb.co/TMBYjY2q/Woo-com.png",
     link: "https://dev-wp02woocom.pantheonsite.io/",
-  },
-    {
-    id: 9,
-    category: "Deployment",
-    title: "CGRS Elite Events",
-    image:
-      "https://i.ibb.co/8nHynYTq/Screenshot-2026-04-12-023321.png",
-    link: "https://www.cgrselite.com/",
   },
 ];
 
