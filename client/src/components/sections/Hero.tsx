@@ -12,18 +12,39 @@ declare global {
   }
 }
 
+function canUseWebGL(): boolean {
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      window.WebGLRenderingContext &&
+      (canvas.getContext("webgl") || canvas.getContext("experimental-webgl"))
+    );
+  } catch {
+    return false;
+  }
+}
+
 export default function Hero() {
-  const [isMobile, setIsMobile] = useState(false);
+  const [showSpline, setShowSpline] = useState(false);
 
   useEffect(() => {
-    const check = () =>
-      setIsMobile(
-        window.matchMedia("(pointer: coarse)").matches ||
-          window.innerWidth < 768
-      );
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
+    const isMobile =
+      window.matchMedia("(pointer: coarse)").matches ||
+      window.innerWidth < 768;
+
+    if (isMobile || !canUseWebGL()) return;
+
+    if (customElements.get("spline-viewer")) {
+      setShowSpline(true);
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.type = "module";
+    script.src =
+      "https://unpkg.com/@splinetool/viewer@1.12.57/build/spline-viewer.js";
+    script.onload = () => setShowSpline(true);
+    document.head.appendChild(script);
   }, []);
 
   return (
@@ -31,17 +52,16 @@ export default function Hero() {
 
       {/* ================= Background ================= */}
       <div className="absolute inset-0 z-0">
-        {isMobile ? (
-          /* Static gradient background for mobile — no WebGL */
-          <div className="w-full h-full bg-gradient-to-br from-black via-zinc-900 to-black">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(255,255,255,0.07),transparent)]" />
-          </div>
-        ) : (
+        {showSpline ? (
           <spline-viewer
             url="https://prod.spline.design/5FhkalGo8zOKwTsh/scene.splinecode"
             class="w-full h-full scale-[1.1] origin-center pointer-events-auto"
             loading-anim-type="none"
           />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-black via-zinc-900 to-black">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(255,255,255,0.07),transparent)]" />
+          </div>
         )}
       </div>
 
