@@ -95,9 +95,7 @@ export default function About() {
           <div
             ref={gridRef}
             className={`relative ${canHover ? "cursor-none" : ""}`}
-            style={{
-              touchAction: "auto",
-            }}
+            style={{ touchAction: "auto" }}
             onPointerEnter={(e) => {
               if (canHover) {
                 setIsActive(true);
@@ -125,13 +123,27 @@ export default function About() {
             }}
           >
             {/* Base Grid */}
-            <div className="grid grid-cols-3 md:grid-cols-4 gap-4 opacity-20">
+            <div
+              className={`grid grid-cols-3 md:grid-cols-4 gap-4 ${
+                canHover ? "opacity-20" : "opacity-100"
+              }`}
+            >
               {skills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="aspect-square border border-white/20 flex flex-col items-center justify-center p-4"
+                  className={`aspect-square flex flex-col items-center justify-center p-4 border ${
+                    canHover
+                      ? "border-white/20"
+                      : "border-primary/40 bg-white/5 backdrop-blur-sm"
+                  }`}
                 >
-                  <skill.icon className="w-6 h-6 mb-2" />
+                  <skill.icon
+                    className={`w-6 h-6 mb-2 ${
+                      !canHover
+                        ? "text-primary drop-shadow-[0_0_15px_rgba(255,255,255,0.6)]"
+                        : ""
+                    }`}
+                  />
                   <span className="text-[10px] text-center">
                     {skill.name}
                   </span>
@@ -139,8 +151,8 @@ export default function About() {
               ))}
             </div>
 
-            {/* Spotlight */}
-            {isActive && (
+            {/* Spotlight (Desktop Only) */}
+            {canHover && isActive && (
               <motion.div
                 className="absolute inset-0 grid grid-cols-3 md:grid-cols-4 gap-4 pointer-events-none"
                 style={{
