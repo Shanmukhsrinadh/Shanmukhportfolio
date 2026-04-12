@@ -43,8 +43,8 @@ const projects = [
     category: "Development",
     title: "Vaijayanta",
     image:
-      "https://i.ibb.co/JWyNZJTd/Screenshot-2026-02-23-001847.png",
-    link: "https://web-asset-manager--yop2483.replit.app",
+      "https://i.ibb.co/fzRdRT04/Screenshot-2026-04-12-120523.png",
+    link: "https://shanmukhsrinadh.github.io/Vaijayanta/",
   },
   {
     id: 5,
