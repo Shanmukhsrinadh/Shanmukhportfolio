@@ -6,6 +6,18 @@ import { Button } from "@/components/ui/button";
 
 const allCertificates = [
   { 
+    title: "Instruction Designer", 
+    issuer: "Dr Reddy's Foundation", 
+    year: "2025",
+    image: "https://i.ibb.co/6RMJ1gfN/Screenshot-2026-05-15-002759.png" 
+  },
+  { 
+    title: "Instruction Designer", 
+    issuer: "Dr Reddy's Foundation", 
+    year: "2025",
+    image: "https://shanmukhsrinadh.github.io/Shannuportfolio/img/DrReddysFoundationcert.jpg" 
+  },
+  { 
     title: "UI/UX Developer", 
     issuer: "Tech Mahindra Foundation", 
     year: "2025",
@@ -16,12 +28,6 @@ const allCertificates = [
     issuer: "InAmigos Foundation", 
     year: "2025",
     image: "https://shanmukhsrinadh.github.io/Shannuportfolio/img/internshala%20certificate.png" 
-  },
-  { 
-    title: "Instruction Designer", 
-    issuer: "Dr Reddy's Foundation", 
-    year: "2025",
-    image: "https://shanmukhsrinadh.github.io/Shannuportfolio/img/DrReddysFoundationcert.jpg" 
   },
   { 
     title: "Website UI/UX Designing", 
