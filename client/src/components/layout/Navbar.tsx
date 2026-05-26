@@ -24,7 +24,7 @@ export default function Navbar() {
   ];
 
   const handleResumeDownload = () => {
-    window.open("https://drive.google.com/file/d/1hWqV2b6pEA8zP9fTXWGztBZZFZctzWHJ/view?usp=sharing", "_blank");
+    window.open("https://drive.google.com/file/d/1KKgBY05_GubRHOIJDRUlGtW0C8zEFBtX/view?usp=sharing", "_blank");
   };
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
