@@ -8,7 +8,7 @@ const allCertificates = [
   { 
     title: "Instruction Designer", 
     issuer: "Dr Reddy's Foundation", 
-    year: "2025",
+    year: "2026",
     image: "https://i.ibb.co/6RMJ1gfN/Screenshot-2026-05-15-002759.png" 
   },
   { 

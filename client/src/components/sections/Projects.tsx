@@ -30,8 +30,16 @@ const projects = [
     link:
       "https://www.figma.com/proto/H5oV9PNMpZlcCDqE7dnHLh/Shanmukh-srinadh-9550563283-?node-id=9-617",
   },
-      {
+  {
     id: 3,
+    category: "Development",
+    title: "Sri Lakshmi Oil Mills",
+    image:
+      "https://i.ibb.co/xqGDGn00/Screenshot-2026-05-26-204433.png",
+    link: "https://srilakshmioilmills.in/",
+  },
+  {
+    id: 5,
     category: "Development",
     title: "CGRS Elite Events",
     image:
@@ -39,7 +47,7 @@ const projects = [
     link: "https://www.cgrselite.com/",
   },
   {
-    id: 4,
+    id: 6,
     category: "Development",
     title: "Vaijayanta",
     image:
@@ -47,7 +55,15 @@ const projects = [
     link: "https://shanmukhsrinadh.github.io/Vaijayanta/",
   },
   {
-    id: 5,
+    id: 7,
+    category: "Development",
+    title: "Tarak Constructions",
+    image:
+      "https://i.ibb.co/CKNmXhkG/Screenshot-2026-05-26-204658.png",
+    link: "https://tarakconstructions.vercel.app/",
+  },
+  {
+    id: 8,
     category: "WordPress",
     title: "Maply Travel",
     image:
@@ -55,7 +71,7 @@ const projects = [
     link: "https://dev-sweb1.pantheonsite.io/",
   },
   {
-    id: 6,
+    id: 9,
     category: "WordPress",
     title: "Gadgets WooCommerce",
     image:
