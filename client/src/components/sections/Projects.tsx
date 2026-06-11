@@ -60,7 +60,7 @@ const projects = [
     title: "Tarak Constructions",
     image:
       "https://i.ibb.co/XkYFbh16/Screenshot-2026-05-28-225812.png",
-    link: "https://tarakconstructions.vercel.app/",
+    link: "https://tarakconstructions.in/",
   },
   {
     id: 8,
