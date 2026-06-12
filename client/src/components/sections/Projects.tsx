@@ -49,19 +49,19 @@ const projects = [
   {
     id: 6,
     category: "Development",
+    title: "Tarak Constructions",
+    image:
+      "https://i.ibb.co/XkYFbh16/Screenshot-2026-05-28-225812.png",
+    link: "https://tarakconstructions.in/",
+  },
+    {
+    id: 7,
+    category: "Development",
     title: "Vaijayanta",
     image:
       "https://i.ibb.co/fzRdRT04/Screenshot-2026-04-12-120523.png",
     link: "https://shanmukhsrinadh.github.io/Vaijayanta/",
     status: "Coming Soon", // Added status tag here
-  },
-  {
-    id: 7,
-    category: "Development",
-    title: "Tarak Constructions",
-    image:
-      "https://i.ibb.co/XkYFbh16/Screenshot-2026-05-28-225812.png",
-    link: "https://tarakconstructions.in/",
   },
   {
     id: 8,
