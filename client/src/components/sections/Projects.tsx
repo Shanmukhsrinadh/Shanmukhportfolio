@@ -53,6 +53,7 @@ const projects = [
     image:
       "https://i.ibb.co/fzRdRT04/Screenshot-2026-04-12-120523.png",
     link: "https://shanmukhsrinadh.github.io/Vaijayanta/",
+    status: "Coming Soon", // Added status tag here
   },
   {
     id: 7,
@@ -174,9 +175,16 @@ export default function Projects() {
               >
                 <div className="flex justify-between items-center">
                   <div>
-                    <span className="text-xs text-primary block mb-2">
-                      {project.category}
-                    </span>
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="text-xs text-primary block">
+                        {project.category}
+                      </span>
+                      {project.status && (
+                        <span className="text-[10px] uppercase tracking-widest px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20 font-medium">
+                          {project.status}
+                        </span>
+                      )}
+                    </div>
                     <h3 className="text-3xl md:text-5xl text-muted-foreground hover:text-foreground transition-colors">
                       {project.title}
                     </h3>
