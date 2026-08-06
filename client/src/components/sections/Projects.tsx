@@ -64,7 +64,7 @@ const projects = [
     status: "Coming Soon", // Added status tag here
   },
       {
-    id: 7,
+    id: 8,
     category: "Development",
     title: "TR Self Drive Cars",
     image:
@@ -73,7 +73,7 @@ const projects = [
     status: "Coming Soon", // Added status tag here
   },
   {
-    id: 8,
+    id: 9,
     category: "WordPress",
     title: "Maply Travel",
     image:
@@ -81,7 +81,7 @@ const projects = [
     link: "https://dev-sweb1.pantheonsite.io/",
   },
   {
-    id: 9,
+    id: 10,
     category: "WordPress",
     title: "Gadgets WooCommerce",
     image:
