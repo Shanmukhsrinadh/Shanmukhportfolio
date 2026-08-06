@@ -68,7 +68,7 @@ const projects = [
     category: "Development",
     title: "TR Self Drive Cars",
     image:
-      "/assets/TRSelfdrivecarspreview.webp",
+      "https://i.ibb.co/6JXnC0Hx/Screenshot-2026-08-06-210855.webp",
     link: "https://shanmukhsrinadh.github.io/TRSelfdrivecars/",
     status: "Coming Soon", // Added status tag here
   },
