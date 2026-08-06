@@ -63,6 +63,15 @@ const projects = [
     link: "https://shanmukhsrinadh.github.io/Vaijayanta/",
     status: "Coming Soon", // Added status tag here
   },
+      {
+    id: 7,
+    category: "Development",
+    title: "TR Self Drive Cars",
+    image:
+      "/assets/TRSelfdrivecarspreview.webp",
+    link: "https://shanmukhsrinadh.github.io/TRSelfdrivecars/",
+    status: "Coming Soon", // Added status tag here
+  },
   {
     id: 8,
     category: "WordPress",
